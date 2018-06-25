@@ -10,8 +10,13 @@ var Book = function(title, author, numberOfPages, publishDate) {
 };
 
 Library.prototype.addBook = function(book) {
-  // Purpose: Add a book object to your books array.
-  // Return: boolean true if it is not already added, false if it is already added.
+  for (var i = 0; i < this.bookShelf.length; i++) {
+    if (this.bookShelf[i].title.indexOf(book.title) > -1) {
+      return false;
+    };
+  };
+  this.bookShelf.push(book);
+  return true;
 };
 
 Library.prototype.removeBookByTitle = function(title) {
@@ -55,5 +60,7 @@ Library.prototype.getRandomAuthorName = function() {
 };
 
 document.addEventListener('DOMContentLoaded', function() {
-  window.erieLibrary = new Library();
+  window.gLibrary = new Library();
 });
+
+var book1 = new Book('Eye of the World', 'Robert Jordan', 685, 'January 15, 1990');
