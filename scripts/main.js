@@ -20,13 +20,23 @@ Library.prototype.addBook = function(book) {
 };
 
 Library.prototype.removeBookByTitle = function(title) {
-  // Purpose: Remove book from from the books array by its title.
-  // Return: boolean true if the book(s) were removed, false if no books match.
+  for (var i = 0; i < this.bookShelf.length; i++) {
+    if (this.bookShelf[i].title === title) {
+      this.bookShelf.splice([i], 1);
+      return true;
+    };
+  };
+  return false;
 };
 
 Library.prototype.removeBookByAuthor = function(authorName) {
-  // Purpose: Remove a specific book from your books array by the author name.
-  // Return: boolean true if the book(s) were removed, false if no books match.
+  for (var i = 0; i < this.bookShelf.length; i++) {
+    if (this.bookShelf[i].author === authorName) {
+      this.bookShelf.splice([i], 1);
+      return true;
+    };
+  };
+  return false;
 };
 
 Library.prototype.getRandomBook = function() {
@@ -64,3 +74,4 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 var book1 = new Book('Eye of the World', 'Robert Jordan', 685, 'January 15, 1990');
+var book2 = new Book('The Great Hunt', 'Robert Jordan', 600, 'November 15, 1990');
