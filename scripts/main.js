@@ -76,8 +76,6 @@ Library.prototype.addBooks = function(books) {
     };
   };
   return bookCount;
-  // Purpose: Takes multiple books, in the form of an array of book objects, and adds the objects to your books array.
-  // Return: number of books successfully added, 0 if no books were added.
 };
 
 Library.prototype.getAuthors = function() {
@@ -89,8 +87,6 @@ Library.prototype.getAuthors = function() {
     return self.indexOf(value) === index;
   });
   return distinctAuthors;
-  // Purpose: Find the distinct authors’ names from all books in your library.
-  // Return: array of strings the names of all distinct authors, empty array if no books exist or if no authors exist.
 };
 
 Library.prototype.getRandomAuthorName = function() {
@@ -98,8 +94,6 @@ Library.prototype.getRandomAuthorName = function() {
     return null;
   };
   return this.getRandomBook().author;
-  // Purpose: Retrieves a random author name from your books collection.
-  // Return: string author name, null if no books exist.
 };
 
 document.addEventListener('DOMContentLoaded', function() {
