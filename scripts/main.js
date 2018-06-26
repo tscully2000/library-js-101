@@ -11,7 +11,7 @@ var Book = function(title, author, numberOfPages, publishDate) {
 
 Library.prototype.addBook = function(book) {
   for (var i = 0; i < this.bookShelf.length; i++) {
-    if (this.bookShelf[i].title.indexOf(book.title) > -1) {
+    if (this.bookShelf[i].title.indexOf(book.title) > -1 || Array.isArray(book)) {
       return false;
     };
   };
@@ -21,7 +21,7 @@ Library.prototype.addBook = function(book) {
 
 Library.prototype.removeBookByTitle = function(title) {
   for (var i = 0; i < this.bookShelf.length; i++) {
-    if (this.bookShelf[i].title === title) {
+    if (this.bookShelf[i].title.toLowerCase() === title.toLowerCase().trim()) {
       this.bookShelf.splice([i], 1);
       return true;
     };
@@ -31,12 +31,12 @@ Library.prototype.removeBookByTitle = function(title) {
 
 Library.prototype.removeBookByAuthor = function(authorName) {
   for (var i = this.bookShelf.length - 1; i >= 0; i--) {
-    if (this.bookShelf[i].author === authorName) {
+    if (this.bookShelf[i].author.toLowerCase() === authorName.toLowerCase().trim()) {
       this.bookShelf.splice([i], 1);
       var result = true;
     } else {
       result = false;
-    }
+    };
   };
   return result;
 };
@@ -51,7 +51,7 @@ Library.prototype.getRandomBook = function() {
 Library.prototype.getBookByTitle = function(title) {
   var titleMatch = [];
   for (var i = 0; i < this.bookShelf.length; i++) {
-    if (this.bookShelf[i].title.toLowerCase().match(title.toLowerCase()) !== null) {
+    if (this.bookShelf[i].title.toLowerCase().match(title.toLowerCase().trim()) !== null) {
       titleMatch.push(this.bookShelf[i]);
     };
   };
@@ -61,7 +61,7 @@ Library.prototype.getBookByTitle = function(title) {
 Library.prototype.getBooksByAuthor = function(authorName) {
   var authorMatch = [];
   for (var i = 0; i < this.bookShelf.length; i++) {
-    if (this.bookShelf[i].author.toLowerCase().match(authorName.toLowerCase()) !== null) {
+    if (this.bookShelf[i].author.toLowerCase().match(authorName.toLowerCase().trim()) !== null) {
       authorMatch.push(this.bookShelf[i]);
     };
   };
