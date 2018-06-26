@@ -47,20 +47,23 @@ Library.prototype.getRandomBook = function() {
 };
 
 Library.prototype.getBookByTitle = function(title) {
-  var bookMatch = [];
+  var titleMatch = [];
   for (var i = 0; i < this.bookShelf.length; i++) {
-    if (this.bookShelf[i].title === title) {
-      bookMatch.push(this.bookShelf[i]);
+    if (this.bookShelf[i].title.toLowerCase().match(title.toLowerCase()) !== null) {
+      titleMatch.push(this.bookShelf[i]);
     };
   };
-  return bookMatch;
-  // Purpose: Return all books that completely or partially matches the string title passed into the function.
-  // Return: array of book objects if you find books with matching titles, empty array if no books are found.
+  return titleMatch;
 };
 
 Library.prototype.getBooksByAuthor = function(authorName) {
-  // Purpose: Finds all books where the author’s name partially or completely matches the authorName argument passed to the function.
-  // Return: array of books if you find books with match authors, empty array if no books match.
+  var authorMatch = [];
+  for (var i = 0; i < this.bookShelf.length; i++) {
+    if (this.bookShelf[i].author.toLowerCase().match(authorName.toLowerCase()) !== null) {
+      authorMatch.push(this.bookShelf[i]);
+    };
+  };
+  return authorMatch;
 };
 
 Library.prototype.addBooks = function(books) {
@@ -80,6 +83,9 @@ Library.prototype.getRandomAuthorName = function() {
 
 document.addEventListener('DOMContentLoaded', function() {
   window.gLibrary = new Library();
+  gLibrary.addBook(book1);
+  gLibrary.addBook(book2);
+  gLibrary.addBook(book3);
 });
 
 var book1 = new Book('Eye of the World', 'Robert Jordan', 685, 'January 15, 1990');
