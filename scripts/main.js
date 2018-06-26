@@ -40,11 +40,20 @@ Library.prototype.removeBookByAuthor = function(authorName) {
 };
 
 Library.prototype.getRandomBook = function() {
-  // Purpose: Return a random book object from your books array.
-  // Return: book object if you find a book, null if there are no books.
+  if (this.bookShelf.length === 0) {
+    return null;
+  };
+  return this.bookShelf[Math.floor(Math.random()*this.bookShelf.length)];
 };
 
 Library.prototype.getBookByTitle = function(title) {
+  var bookMatch = [];
+  for (var i = 0; i < this.bookShelf.length; i++) {
+    if (this.bookShelf[i].title === title) {
+      bookMatch.push(this.bookShelf[i]);
+    };
+  };
+  return bookMatch;
   // Purpose: Return all books that completely or partially matches the string title passed into the function.
   // Return: array of book objects if you find books with matching titles, empty array if no books are found.
 };
@@ -75,3 +84,4 @@ document.addEventListener('DOMContentLoaded', function() {
 
 var book1 = new Book('Eye of the World', 'Robert Jordan', 685, 'January 15, 1990');
 var book2 = new Book('The Great Hunt', 'Robert Jordan', 600, 'November 15, 1990');
+var book3 = new Book('The Phantom Tollbooth', 'Norton Juster', 255, 'February 8, 1961');
