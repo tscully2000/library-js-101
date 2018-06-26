@@ -81,20 +81,32 @@ Library.prototype.addBooks = function(books) {
 };
 
 Library.prototype.getAuthors = function() {
+  var currentBooks = [];
+  for (var i = 0; i < this.bookShelf.length; i++ ) {
+    currentBooks.push(this.bookShelf[i].author);
+  };
+  var distinctAuthors = currentBooks.filter(function(value, index, self) {
+    return self.indexOf(value) === index;
+  });
+  return distinctAuthors;
   // Purpose: Find the distinct authors’ names from all books in your library.
   // Return: array of strings the names of all distinct authors, empty array if no books exist or if no authors exist.
 };
 
 Library.prototype.getRandomAuthorName = function() {
+  if (this.bookShelf.length === 0) {
+    return null;
+  };
+  return this.getRandomBook().author;
   // Purpose: Retrieves a random author name from your books collection.
   // Return: string author name, null if no books exist.
 };
 
 document.addEventListener('DOMContentLoaded', function() {
   window.gLibrary = new Library();
-  // gLibrary.addBook(book1);
-  // gLibrary.addBook(book2);
-  // gLibrary.addBook(book3);
+  gLibrary.addBook(book1);
+  gLibrary.addBook(book2);
+  gLibrary.addBook(book3);
 });
 
 var book1 = new Book('Eye of the World', 'Robert Jordan', 685, 'January 15, 1990');
