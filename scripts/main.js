@@ -69,6 +69,13 @@ Library.prototype.getBooksByAuthor = function(authorName) {
 };
 
 Library.prototype.addBooks = function(books) {
+  var bookCount = 0;
+  for (var i = 0; i < books.length; i++) {
+    if (this.addBook(books[i]) && Array.isArray(books)) {
+      bookCount++;
+    };
+  };
+  return bookCount;
   // Purpose: Takes multiple books, in the form of an array of book objects, and adds the objects to your books array.
   // Return: number of books successfully added, 0 if no books were added.
 };
@@ -85,11 +92,12 @@ Library.prototype.getRandomAuthorName = function() {
 
 document.addEventListener('DOMContentLoaded', function() {
   window.gLibrary = new Library();
-  gLibrary.addBook(book1);
-  gLibrary.addBook(book2);
-  gLibrary.addBook(book3);
+  // gLibrary.addBook(book1);
+  // gLibrary.addBook(book2);
+  // gLibrary.addBook(book3);
 });
 
 var book1 = new Book('Eye of the World', 'Robert Jordan', 685, 'January 15, 1990');
 var book2 = new Book('The Great Hunt', 'Robert Jordan', 600, 'November 15, 1990');
 var book3 = new Book('The Phantom Tollbooth', 'Norton Juster', 255, 'February 8, 1961');
+var bookArr = [book1, book2, book3];
