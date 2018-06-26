@@ -30,13 +30,15 @@ Library.prototype.removeBookByTitle = function(title) {
 };
 
 Library.prototype.removeBookByAuthor = function(authorName) {
-  for (var i = 0; i < this.bookShelf.length; i++) {
+  for (var i = this.bookShelf.length - 1; i >= 0; i--) {
     if (this.bookShelf[i].author === authorName) {
       this.bookShelf.splice([i], 1);
-      return true;
-    };
+      var result = true;
+    } else {
+      result = false;
+    }
   };
-  return false;
+  return result;
 };
 
 Library.prototype.getRandomBook = function() {
