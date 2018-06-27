@@ -19,6 +19,16 @@ Library.prototype.addBook = function(book) {
   return true;
 };
 
+Library.prototype.addBooks = function(books) {
+  var bookCount = 0;
+  for (var i = 0; i < books.length; i++) {
+    if (this.addBook(books[i]) && Array.isArray(books)) {
+      bookCount++;
+    };
+  };
+  return bookCount;
+};
+
 Library.prototype.removeBookByTitle = function(title) {
   for (var i = 0; i < this.bookShelf.length; i++) {
     if (this.bookShelf[i].title.toLowerCase() === title.toLowerCase().trim()) {
@@ -41,13 +51,6 @@ Library.prototype.removeBookByAuthor = function(authorName) {
   return result;
 };
 
-Library.prototype.getRandomBook = function() {
-  if (this.bookShelf.length === 0) {
-    return null;
-  };
-  return this.bookShelf[Math.floor(Math.random()*this.bookShelf.length)];
-};
-
 Library.prototype.getBookByTitle = function(title) {
   var titleMatch = [];
   for (var i = 0; i < this.bookShelf.length; i++) {
@@ -68,16 +71,6 @@ Library.prototype.getBooksByAuthor = function(authorName) {
   return authorMatch;
 };
 
-Library.prototype.addBooks = function(books) {
-  var bookCount = 0;
-  for (var i = 0; i < books.length; i++) {
-    if (this.addBook(books[i]) && Array.isArray(books)) {
-      bookCount++;
-    };
-  };
-  return bookCount;
-};
-
 Library.prototype.getAuthors = function() {
   var currentBooks = [];
   for (var i = 0; i < this.bookShelf.length; i++ ) {
@@ -87,6 +80,13 @@ Library.prototype.getAuthors = function() {
     return self.indexOf(value) === index;
   });
   return distinctAuthors;
+};
+
+Library.prototype.getRandomBook = function() {
+  if (this.bookShelf.length === 0) {
+    return null;
+  };
+  return this.bookShelf[Math.floor(Math.random()*this.bookShelf.length)];
 };
 
 Library.prototype.getRandomAuthorName = function() {
