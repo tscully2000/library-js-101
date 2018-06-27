@@ -26,7 +26,7 @@ Library.prototype.addBook = function(book) {
       };
     };
     this.bookShelf.push(book);
-    this.setObject(this.keyInstance);
+    this.setObject(instanceKey);
     return true;
   };
   return false;
@@ -40,7 +40,7 @@ Library.prototype.addBooks = function(books) {
         bookCount++;
       };
     };
-    this.setObject(this.keyInstance);
+    this.setObject(instanceKey);
     return bookCount;
   };
   return false;
@@ -127,28 +127,29 @@ Library.prototype.getRandomAuthorName = function() {
 
 Library.prototype.setObject = function(instanceKey) {
   localStorage.setItem(instanceKey, JSON.stringify(this.bookShelf));
+  return true;
 };
 
-Library.prototype.getObject = function() {
+Library.prototype.getObject = function(instanceKey) {
   // var myShelf = [];
   // for (var i = 0; i < this.bookShelf.length; i++) {
-  //   myShelf.push(new Book(JSON.parse(localStorage.getItem(this.keyInstance))));
+  //   myShelf.push(new Book(JSON.parse(localStorage.getItem(instanceKey))));
   // };
   // return myShelf;
   return JSON.parse(localStorage.getItem(this.keyInstance));
 };
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function(instanceKey) {
   window.gLibrary = new Library('myLibrary');
   // gLibrary.addBook(book1);
   // gLibrary.addBook(book2);
   // gLibrary.addBook(book3);
   if (localStorage.length > 0) {
-    gLibrary.bookShelf = gLibrary.getObject();
+    gLibrary.bookShelf = gLibrary.getObject(instanceKey);
   };
 });
 
-var book1 = new Book('Eye of the World', 'Robert Jordan', 685, 'January 15, 1990');
+var book1 = new Book ('Eye of the World', 'Robert Jordan', 685, 'January 15, 1990');
 var book2 = new Book('The Great Hunt', 'Robert Jordan', 600, 'November 15, 1990');
 var book3 = new Book('The Phantom Tollbooth', 'Norton Juster', 255, 'February 8, 1961');
 var bookArr = [book1, book2, book3];
