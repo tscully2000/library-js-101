@@ -1,5 +1,6 @@
-var Library = function() {
+var Library = function(instanceKey) {
   this.bookShelf = new Array();
+  this.keyInstance = instanceKey;
 };
 
 var Book = function(title, author, numberOfPages, publishDate) {
@@ -16,6 +17,7 @@ Library.prototype.addBook = function(book) {
     };
   };
   this.bookShelf.push(book);
+  this.setObject(this.keyInstance);
   return true;
 };
 
@@ -26,6 +28,7 @@ Library.prototype.addBooks = function(books) {
       bookCount++;
     };
   };
+  this.setObject(this.keyInstance);
   return bookCount;
 };
 
@@ -96,11 +99,27 @@ Library.prototype.getRandomAuthorName = function() {
   return this.getRandomBook().author;
 };
 
+Library.prototype.setObject = function(instanceKey) {
+  localStorage.setItem(instanceKey, JSON.stringify(this.bookShelf));
+};
+
+Library.prototype.getObject = function() {
+  // var myShelf = [];
+  // for (var i = 0; i < this.bookShelf.length; i++) {
+  //   myShelf.push(new Book(JSON.parse(localStorage.getItem(this.keyInstance))));
+  // };
+  // return myShelf;
+  return JSON.parse(localStorage.getItem(this.keyInstance));
+};
+
 document.addEventListener('DOMContentLoaded', function() {
-  window.gLibrary = new Library();
-  gLibrary.addBook(book1);
-  gLibrary.addBook(book2);
-  gLibrary.addBook(book3);
+  window.gLibrary = new Library('myLibrary');
+  // gLibrary.addBook(book1);
+  // gLibrary.addBook(book2);
+  // gLibrary.addBook(book3);
+  if (localStorage.length > 0) {
+    gLibrary.bookShelf = gLibrary.getObject(this.keyInstance);
+  };
 });
 
 var book1 = new Book('Eye of the World', 'Robert Jordan', 685, 'January 15, 1990');
