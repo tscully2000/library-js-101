@@ -1,13 +1,20 @@
-var Library = function(key) {
-  this.bookShelf = new Array();
-  this.instanceKey = key;
-};
+(function() {
+  var instance;
+  Library = function(key) {
+    if (instance) {
+      return instance;
+    };
+    instance = this;
+    this.bookShelf = [];
+    this.instanceKey = key;
+  };
+})();
 
 var Book = function(title, author, numberOfPages, publishDate) {
   this.title = title;
   this.author = author;
   this.numberOfPages = numberOfPages;
-  this.publishDate = new Date(publishDate);
+  this.publishDate = new Date(publishDate).getFullYear();
 };
 
 Library.prototype.validateInput = function(input) {
@@ -50,7 +57,7 @@ Library.prototype.removeBookByTitle = function(title) {
   if (this.validateInput(title)) {
     for (var i = 0; i < this.bookShelf.length; i++) {
       if (this.bookShelf[i].title.toLowerCase() === title.toLowerCase().trim()) {
-        this.bookShelf.splice([i], 1);
+        this.bookShelf.splice(i, 1);
         return true;
       };
     };
@@ -63,7 +70,7 @@ Library.prototype.removeBookByAuthor = function(authorName) {
   if (this.validateInput(authorName)) {
     for (var i = this.bookShelf.length - 1; i >= 0; i--) {
       if (this.bookShelf[i].author.toLowerCase() === authorName.toLowerCase().trim()) {
-        this.bookShelf.splice([i], 1);
+        this.bookShelf.splice(i, 1);
         var result = true;
       };
     };
@@ -94,6 +101,17 @@ Library.prototype.getBooksByAuthor = function(authorName) {
       };
     };
     return authorMatch;
+  };
+  return false;
+};
+
+Library.prototype.searchShelf = function(args) {
+  if (this.validateInput(args)) {
+    var foundBooks = this.getBookByTitle(args).concat(this.getBooksByAuthor(args));
+    if (foundBooks.length < 1) {
+      return false;
+    };
+    return foundBooks;
   };
   return false;
 };
@@ -129,8 +147,8 @@ Library.prototype.setObject = function() {
 };
 
 Library.prototype.getObject = function() {
-  var books = JSON.parse(localStorage.getItem(this.instanceKey));
   var myShelf = [];
+  var books = JSON.parse(localStorage.getItem(this.instanceKey));
   for (var i = 0; i < books.length; i++) {
     myShelf.push(new Book(books[i].title, books[i].author, books[i].numberOfPages, books[i].publishDate));
   };
@@ -138,10 +156,10 @@ Library.prototype.getObject = function() {
 };
 
 document.addEventListener('DOMContentLoaded', function() {
-  window.gLibrary = new Library('myLibrary');
-  // gLibrary.addBooks(bookArr);
+  window.erieLibrary = new Library('myLibrary');
+  // erieLibrary.addBooks(bookArr);
   if (localStorage.length > 0) {
-    gLibrary.bookShelf = gLibrary.getObject(this.instanceKey);
+    erieLibrary.bookShelf = erieLibrary.getObject();
   };
 });
 
