@@ -14,15 +14,14 @@ var Book = function(title, author, numberOfPages, publishDate) {
   this.title = title;
   this.author = author;
   this.numberOfPages = numberOfPages;
-  this.publishDate = new Date(publishDate).getFullYear();
+  this.publishDate = new Date(publishDate.toString()).getUTCFullYear();
 };
 
 Library.prototype.validateInput = function(input) {
   if (input && input !== '') {
     return true;
-  } else {
-    return false;
   };
+  return false;
 };
 
 Library.prototype.addBook = function(book) {
@@ -105,9 +104,22 @@ Library.prototype.getBooksByAuthor = function(authorName) {
   return false;
 };
 
+Library.prototype.getPubDate = function(pubDate) {
+  if (this.validateInput(pubDate)) {
+    var pubMatch = [];
+    for (var i = 0; i < this.bookShelf.length; i++) {
+      if (this.bookShelf[i].publishDate === parseInt(pubDate)) {
+        pubMatch.push(this.bookShelf[i]);
+      };
+    };
+    return pubMatch;
+  };
+  return false;
+};
+
 Library.prototype.searchShelf = function(args) {
   if (this.validateInput(args)) {
-    var foundBooks = this.getBookByTitle(args).concat(this.getBooksByAuthor(args));
+    var foundBooks = this.getBookByTitle(args).concat(this.getBooksByAuthor(args), this.getPubDate(args));
     if (foundBooks.length < 1) {
       return false;
     };
