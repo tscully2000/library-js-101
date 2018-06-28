@@ -117,9 +117,23 @@ Library.prototype.getPubDate = function(pubDate) {
   return false;
 };
 
+Library.prototype.getNumPage = function(numPage) {
+  if (this.validateInput(numPage)) {
+    var pageMatch = [];
+    for (var i = 0; i < this.bookShelf.length; i++) {
+      var totalPages = this.bookShelf[i].numberOfPages;
+      if (totalPages >= parseInt(numPage) - 50 && totalPages <= parseInt(numPage) + 50) {
+        pageMatch.push(this.bookShelf[i]);
+      }; 
+    };
+    return pageMatch;
+  };
+  return false;
+};
+
 Library.prototype.searchShelf = function(args) {
   if (this.validateInput(args)) {
-    var foundBooks = this.getBookByTitle(args).concat(this.getBooksByAuthor(args), this.getPubDate(args));
+    var foundBooks = this.getBookByTitle(args).concat(this.getBooksByAuthor(args), this.getPubDate(args), this.getNumPage(args));
     if (foundBooks.length < 1) {
       return false;
     };
