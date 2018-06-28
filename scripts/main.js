@@ -1,6 +1,6 @@
-var Library = function(instanceKey) {
+var Library = function(key) {
   this.bookShelf = new Array();
-  this.keyInstance = instanceKey;
+  this.instanceKey = key;
 };
 
 var Book = function(title, author, numberOfPages, publishDate) {
@@ -26,7 +26,7 @@ Library.prototype.addBook = function(book) {
       };
     };
     this.bookShelf.push(book);
-    this.setObject(instanceKey);
+    this.setObject();
     return true;
   };
   return false;
@@ -40,7 +40,7 @@ Library.prototype.addBooks = function(books) {
         bookCount++;
       };
     };
-    this.setObject(instanceKey);
+    this.setObject();
     return bookCount;
   };
   return false;
@@ -65,8 +65,6 @@ Library.prototype.removeBookByAuthor = function(authorName) {
       if (this.bookShelf[i].author.toLowerCase() === authorName.toLowerCase().trim()) {
         this.bookShelf.splice([i], 1);
         var result = true;
-      } else {
-        result = false;
       };
     };
     return result;
@@ -125,31 +123,30 @@ Library.prototype.getRandomAuthorName = function() {
   return this.getRandomBook().author;
 };
 
-Library.prototype.setObject = function(instanceKey) {
-  localStorage.setItem(instanceKey, JSON.stringify(this.bookShelf));
+Library.prototype.setObject = function() {
+  localStorage.setItem(this.instanceKey, JSON.stringify(this.bookShelf));
   return true;
 };
 
-Library.prototype.getObject = function(instanceKey) {
-  // var myShelf = [];
-  // for (var i = 0; i < this.bookShelf.length; i++) {
-  //   myShelf.push(new Book(JSON.parse(localStorage.getItem(instanceKey))));
-  // };
-  // return myShelf;
-  return JSON.parse(localStorage.getItem(this.keyInstance));
+Library.prototype.getObject = function() {
+  var books = JSON.parse(localStorage.getItem(this.instanceKey));
+  var myShelf = [];
+  for (var i = 0; i < books.length; i++) {
+    myShelf.push(new Book(books[i].title, books[i].author, books[i].numberOfPages, books[i].publishDate));
+  };
+  return myShelf;
 };
 
-document.addEventListener('DOMContentLoaded', function(instanceKey) {
+document.addEventListener('DOMContentLoaded', function() {
   window.gLibrary = new Library('myLibrary');
-  // gLibrary.addBook(book1);
-  // gLibrary.addBook(book2);
-  // gLibrary.addBook(book3);
+  // gLibrary.addBooks(bookArr);
   if (localStorage.length > 0) {
-    gLibrary.bookShelf = gLibrary.getObject(instanceKey);
+    gLibrary.bookShelf = gLibrary.getObject(this.instanceKey);
   };
 });
 
 var book1 = new Book ('Eye of the World', 'Robert Jordan', 685, 'January 15, 1990');
 var book2 = new Book('The Great Hunt', 'Robert Jordan', 600, 'November 15, 1990');
 var book3 = new Book('The Phantom Tollbooth', 'Norton Juster', 255, 'February 8, 1961');
-var bookArr = [book1, book2, book3];
+var book4 = new Book('The Lion, the Witch, and the Wardrobe', 'C.S. Lewis', 208, 'October 16, 1950');
+var bookArr = [book1, book2, book3, book4];
