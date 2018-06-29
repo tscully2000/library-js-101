@@ -78,6 +78,12 @@ Library.prototype.removeBookByAuthor = function(authorName) {
   return false;
 };
 
+Library.prototype.removeAllBooks = function() {
+  this.bookShelf = [];
+  localStorage.clear();
+  return true;
+};
+
 Library.prototype.getBookByTitle = function(title) {
   if (this.validateInput(title)) {
     var titleMatch = [];
