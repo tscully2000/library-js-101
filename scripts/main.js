@@ -1,3 +1,4 @@
+var Library;
 (function() {
   var instance;
   Library = function(key) {
@@ -17,15 +18,8 @@ var Book = function(title, author, numberOfPages, publishDate) {
   this.publishDate = new Date(publishDate.toString()).getUTCFullYear();
 };
 
-Library.prototype.validateInput = function(input) {
-  if (input && input !== '') {
-    return true;
-  };
-  return false;
-};
-
 Library.prototype.addBook = function(book) {
-  if (this.validateInput(book)) {
+  if (book) {
     for (var i = 0; i < this.bookShelf.length; i++) {
       if (this.bookShelf[i].title.indexOf(book.title) > -1 || Array.isArray(book)) {
         return false;
@@ -39,7 +33,7 @@ Library.prototype.addBook = function(book) {
 };
 
 Library.prototype.addBooks = function(books) {
-  if (this.validateInput(books)) {
+  if (books) {
     var bookCount = 0;
     for (var i = 0; i < books.length; i++) {
       if (this.addBook(books[i]) && Array.isArray(books)) {
@@ -53,33 +47,41 @@ Library.prototype.addBooks = function(books) {
 };
 
 Library.prototype.removeBookByTitle = function(title) {
-  if (this.validateInput(title)) {
+  if (title) {
     for (var i = 0; i < this.bookShelf.length; i++) {
       if (this.bookShelf[i].title.toLowerCase() === title.toLowerCase().trim()) {
         this.bookShelf.splice(i, 1);
         return true;
       };
     };
+    this.setObject();
     return false;
   };
   return false;
 };
 
 Library.prototype.removeBookByAuthor = function(authorName) {
-  if (this.validateInput(authorName)) {
+  if (authorName) {
     for (var i = this.bookShelf.length - 1; i >= 0; i--) {
       if (this.bookShelf[i].author.toLowerCase() === authorName.toLowerCase().trim()) {
         this.bookShelf.splice(i, 1);
         var result = true;
       };
     };
+    this.setObject();
     return result;
   };
   return false;
 };
 
+Library.prototype.removeAllBooks = function() {
+  this.bookShelf = [];
+  localStorage.setItem(this.instanceKey, []);
+  return true;
+};
+
 Library.prototype.getBookByTitle = function(title) {
-  if (this.validateInput(title)) {
+  if (title) {
     var titleMatch = [];
     for (var i = 0; i < this.bookShelf.length; i++) {
       if (this.bookShelf[i].title.toLowerCase().indexOf(title.toLowerCase().trim()) > -1) {
@@ -92,7 +94,7 @@ Library.prototype.getBookByTitle = function(title) {
 };
 
 Library.prototype.getBooksByAuthor = function(authorName) {
-  if (this.validateInput(authorName)) {
+  if (authorName) {
     var authorMatch = [];
     for (var i = 0; i < this.bookShelf.length; i++) {
       if (this.bookShelf[i].author.toLowerCase().indexOf(authorName.toLowerCase().trim()) > -1) {
@@ -105,7 +107,7 @@ Library.prototype.getBooksByAuthor = function(authorName) {
 };
 
 Library.prototype.getPubDate = function(pubDate) {
-  if (this.validateInput(pubDate)) {
+  if (pubDate) {
     var pubMatch = [];
     for (var i = 0; i < this.bookShelf.length; i++) {
       if (this.bookShelf[i].publishDate === parseInt(pubDate)) {
@@ -118,7 +120,7 @@ Library.prototype.getPubDate = function(pubDate) {
 };
 
 Library.prototype.getNumPage = function(numPage) {
-  if (this.validateInput(numPage)) {
+  if (numPage) {
     var pageMatch = [];
     for (var i = 0; i < this.bookShelf.length; i++) {
       var totalPages = this.bookShelf[i].numberOfPages;
@@ -132,12 +134,15 @@ Library.prototype.getNumPage = function(numPage) {
 };
 
 Library.prototype.searchShelf = function(args) {
-  if (this.validateInput(args)) {
+  if (args) {
     var foundBooks = this.getBookByTitle(args).concat(this.getBooksByAuthor(args), this.getPubDate(args), this.getNumPage(args));
     if (foundBooks.length < 1) {
       return false;
     };
-    return foundBooks;
+    var filteredBooks = foundBooks.filter(function(value, index, self) {
+      return self.indexOf(value) === index;
+    });
+    return filteredBooks;
   };
   return false;
 };
