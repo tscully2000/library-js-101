@@ -19,9 +19,9 @@ var Book = function(title, author, numberOfPages, publishDate) {
 };
 
 Library.prototype.addBook = function(book) {
-  if (!Array.isArray(book)) {
+  if (book) {
     for (var i = 0; i < this.bookShelf.length; i++) {
-      if (this.bookShelf[i].title.indexOf(book.title) > -1) {
+      if (this.bookShelf[i].title.indexOf(book.title) > -1 || Array.isArray(book)) {
         return false;
       };
     };
@@ -33,10 +33,10 @@ Library.prototype.addBook = function(book) {
 };
 
 Library.prototype.addBooks = function(books) {
-  if (Array.isArray(books)) {
+  if (books) {
     var bookCount = 0;
     for (var i = 0; i < books.length; i++) {
-      if (this.addBook(books[i])) {
+      if (this.addBook(books[i]) && Array.isArray(books)) {
         bookCount++;
       };
     };
