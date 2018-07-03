@@ -1,0 +1,17 @@
+body {
+  background-image: url("../assets/parchment-paper.jpg");
+  background-size: cover;
+}
+
+header {
+  background-image: url("../assets/library-banner.png");
+}
+
+.search-wrap {
+  margin: 0 auto;
+}
+
+/* .search-bar {
+  display: inline-block;
+  margin: 0 auto;
+} */

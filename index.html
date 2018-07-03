@@ -9,6 +9,37 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+  <div class="container-fluid">
+    <!-- Library Banner -->
+    <header class="row library-banner">
+      <div class="col-md-8 col-md-offset-2">
+        <h1 class="library-title text-center">Library</h1>
+      </div>
+      <div class="col-md-2">
+        <!-- Login -->
+        <form class="login-form">
+          <fieldset name="login-credentials">
+            <legend>Login:</legend>
+            <input class="username-input" name="username" autocomplete="username" placeholder="Username">
+            <input class="password-input" type="password" name="password" autocomplete="current-password" placeholder="Password">
+            <button class"btn submit-button">Submit</button>
+          </fieldset>
+        </form>
+      </div>
+    </header>
+    <!-- Search Bar -->
+    <aside class="row search-library">
+      <div class="col-md-8 col-md-offset-2">
+        <div class="search-wrap">
+          <input class="search-bar" name="searchbar" placeholder="Please enter a title, author, page number, or publish date">
+          <button class="btn search-button">Search</button>
+          <button class="btn recommend-book">Recommend Book</button>
+          <button class="btn recommend-author">Recommend Author</button>
+        </div>
+      </div>
+    </aside>
+
+  </div>
   <script src="scripts/bootstrap.js"></script>
   <script src="scripts/main.js"></script>
 </body>
