@@ -7,6 +7,7 @@
   <title>My Library</title>
   <link rel="stylesheet" href="css/bootstrap.css">
   <link rel="stylesheet" href="css/styles.css">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 </head>
 <body>
   <div class="container-fluid">
@@ -17,16 +18,16 @@
       </div>
       <div class="col-md-4">
         <!-- Login -->
-        <form class="login-form form-inline pull-right">
+        <form class="login-form pull-right">
           <div class="form-group">
             <label for="username-input" class="sr-only">Username</label>
-            <input id="username-input" class="form-control" type="text" name="username" autocomplete="username" placeholder="Username">
+            <input id="username-input" class="form-control input-width" type="text" name="username" autocomplete="username" placeholder="Username">
           </div>
           <div class="form-group">
             <label for="password-input" class="sr-only">Password</label>
-            <input id="password-input" class="form-control" type="password" name="password" autocomplete="current-password" placeholder="Password">
+            <input id="password-input" class="form-control input-width" type="password" name="password" autocomplete="current-password" placeholder="Password">
           </div>
-          <button class="btn btn-default login-button" type="submit">Login</button>
+          <button class="btn btn-primary login-button pull-right" type="submit">Login</button>
         </form>
       </div>
     </header>
@@ -67,36 +68,53 @@
               <th>Author</th>
               <th>Number of Pages</th>
               <th>Publish Date</th>
+              <th>Edit</th>
             </tr>
             </thead>
             <tbody>
             <tr>
-              <td>Img</td>
+              <td><img class="table-img center-block" src="assets/eye-of-the-world.jpg" alt="Book cover"></td>
               <td>Eye of the World</td>
               <td>Robert Jordan</td>
               <td>685</td>
               <td>January 15, 1990</td>
+              <td>
+                <span class="glyphicon glyphicon-pencil" role="button"></span>
+                <span class="glyphicon glyphicon-remove-circle" role="button"></span>
+              </td>
             </tr>
             <tr>
-              <td>Img</td>
+              <td><img class="table-img center-block" src="assets/the-great-hunt.jpg" alt="Book cover"></td>
               <td>The Great Hunt</td>
               <td>Robert Jordan</td>
               <td>600</td>
               <td>November 15, 1990</td>
+              <td>
+                <span class="glyphicon glyphicon-pencil" role="button"></span>
+                <span class="glyphicon glyphicon-remove-circle" role="button"></span>
+              </td>
             </tr>
             <tr>
-              <td>Img</td>
+              <td><img class="table-img center-block" src="assets/the-phantom-tollbooth.jpg" alt="Book cover"></td>
               <td>The Phantom Tollbooth</td>
               <td>Norton Juster</td>
               <td>255</td>
               <td>February 8, 1961</td>
+              <td>
+                <span class="glyphicon glyphicon-pencil" role="button"></span>
+                <span class="glyphicon glyphicon-remove-circle" role="button"></span>
+              </td>
             </tr>
             <tr>
-              <td>Img</td>
+              <td><img class="table-img center-block" src="assets/lion-witch-wardrobe.jpg" alt="Book cover"></td>
               <td>The Lion, the Witch, and the Wardrobe</td>
               <td>C.S. Lewis</td>
               <td>208</td>
               <td>October 16, 1950</td>
+              <td>
+                <span class="glyphicon glyphicon-pencil" role="button"></span>
+                <span class="glyphicon glyphicon-remove-circle" role="button"></span>
+              </td>
             </tr>
             </tbody>
           </table>
@@ -106,7 +124,7 @@
     <!-- Footer -->
     <footer class="row text-center">
       <div class="col-md-4 col-md-offset-4">
-        <p>&copy; Copyright 2018</p>
+        <p class="h5">&copy; Copyright 2018</p>
       </div>
     </footer>
   <!-- Closing Container Fluid -->
