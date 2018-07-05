@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Library 101</title>
+  <title>My Library</title>
   <link rel="stylesheet" href="css/bootstrap.css">
   <link rel="stylesheet" href="css/styles.css">
 </head>
@@ -38,8 +38,8 @@
           <input id="search-bar" class="form-control center-block text-center" type="text" name="searchbar" placeholder="Please enter a title, author, page number, or publish date.">
         </form>
         <div class="recommend-wrap text-center">
-          <button class="btn btn-default recommend-book">Recommend Book</button>
-          <button class="btn btn-default recommend-author">Recommend Author</button>
+          <button class="btn btn-default recommend-book-button" data-toggle="modal" data-target="#recommend-book">Recommend Book</button>
+          <button class="btn btn-default recommend-author-button" data-toggle="modal" data-target="#recommend-author">Recommend Author</button>
         </div>
       </div>
     </section>
@@ -209,7 +209,7 @@
       </div>
     </div>
   </div>
-  <!-- Show All Books -->
+  <!-- Show All Books Modal -->
   <div class="modal fade" id="show-all-books" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -231,8 +231,51 @@
       </div>
     </div>
   </div>
-
-
+  <!-- Recommend Author Model -->
+  <div class="modal fade" id="recommend-author" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Author Of The Day</h4>
+        </div>
+        <div class="modal-body">
+          <ul class="random-author-list">
+            <li>Robert Jordan</li>
+          </ul>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Recommend Book Modal -->
+  <div class="modal fade" id="recommend-book" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Book Of The Day</h4>
+        </div>
+        <div class="row modal-body">
+          <div class="col-md-6">
+            <img class="img-responsive" src="assets/eye-of-the-world.jpg" alt="A book cover">
+          </div>
+          <div class="col-md-6">
+            <p class="h5">Eye of the World</p>
+            <p class="h5">Robert Jordan</p>
+            <p class="h5">685 Pages</p>
+            <p class="h5">January 15, 1990</p>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Scripts -->
   <script src="scripts/jQuery.js"></script>
   <script src="scripts/bootstrap.js"></script>
   <script src="scripts/main.js"></script>
