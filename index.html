@@ -46,8 +46,8 @@
     <!-- Library Filter Buttons -->
     <aside class="row filter-buttons">
       <div class="col-md-4 show-all">
-        <button class="btn btn-default all-books">Show All Books</button>
-        <button class="btn btn-default all-authors">Show All Authors</button>
+        <button class="btn btn-default all-books-button" data-toggle="modal" data-target="#show-all-books">Show All Books</button>
+        <button class="btn btn-default all-authors-button" data-toggle="modal" data-target="#show-all-authors">Show All Authors</button>
       </div>
       <div class="col-md-4 empty"></div>
       <div class="col-md-4 add-remove">
@@ -111,8 +111,7 @@
     </footer>
   <!-- Closing Container Fluid -->
   </div>
-  <!-- Modals -->
-  <!-- Add Book -->
+  <!-- Add Book Modal -->
   <div class="modal fade" id="add-book" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -146,23 +145,93 @@
             </div>
             <div class="form-group">
               <label for="browse-button">Book Cover</label>
-              <p><button class="btn btn-default" id="browse-button">Browse...</button>&emsp;No file selected.</p>
+              <p><button type="button" class="btn btn-default" id="browse-button">Browse...</button>&emsp;No file selected.</p>
             </div>
           </form>
         </div>
         <div class="modal-footer">
           <div class="row">
             <div class="col-md-6">
-              <button class="btn btn-default pull-left" id="queue-button">Queue Book To Add</button>
+              <button type="button" class="btn btn-default pull-left" id="queue-button">Queue Book To Add</button>
             </div>
             <div class="col-md-6">
-              <button class="btn btn-default" id="add-books-button">Add Books To Library</button>
+              <button type="button" class="btn btn-default" id="add-books-button">Add Books To Library</button>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+  <!-- Remove Book Modal -->
+  <div class="modal fade" id="remove-book" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Remove Books</h4>
+        </div>
+        <div class="modal-body">
+          <form class="remove-book-form">
+            <div class="form-group">
+              <label for="remove-title-input">Remove By Title</label>
+              <input type="text" class="form-control" id="remove-title-input" name="remove-title">
+            </div>
+            <div class="form-group">
+              <label for="remove-author-input">Remove By Author</label>
+              <input type="text" class="form-control" id="remove-author-input" name="remove-author">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" id="remove-books-button">Remove Books</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Show All Authors Modal -->
+  <div class="modal fade" id="show-all-authors" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">All Authors</h4>
+        </div>
+        <div class="modal-body">
+          <ul class="author-list">
+            <li>Robert Jordan</li>
+            <li>Norton Juster</li>
+            <li>C.S. Lewis</li>
+          </ul>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Show All Books -->
+  <div class="modal fade" id="show-all-books" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">All Books</h4>
+        </div>
+        <div class="modal-body">
+          <ul class="book-list">
+            <li>Eye of the World</li>
+            <li>The Great Hunt</li>
+            <li>The Phantom Tollbooth</li>
+            <li>The Lion, the Witch, and the Wardrobe</li>
+          </ul>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 
   <script src="scripts/jQuery.js"></script>
   <script src="scripts/bootstrap.js"></script>
