@@ -186,13 +186,13 @@ Library.prototype.getObject = function() {
   return myShelf;
 };
 
-document.addEventListener('DOMContentLoaded', function() {
-  window.erieLibrary = new Library('myLibrary');
-  // erieLibrary.addBooks(bookArr);
-  if (localStorage.length > 0) {
-    erieLibrary.bookShelf = erieLibrary.getObject();
-  };
-});
+// document.addEventListener('DOMContentLoaded', function() {
+//   window.gLibrary = new Library('myLibrary');
+//   gLibrary.addBooks(bookArr);
+//   if (localStorage.length > 0) {
+//     gLibrary.bookShelf = gLibrary.getObject();
+//   };
+// });
 
 var book1 = new Book ('Eye of the World', 'Robert Jordan', 685, 'January 15, 1990');
 var book2 = new Book('The Great Hunt', 'Robert Jordan', 600, 'November 15, 1990');
