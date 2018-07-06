@@ -4,11 +4,296 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Library 101</title>
+  <title>My Library</title>
   <link rel="stylesheet" href="css/bootstrap.css">
   <link rel="stylesheet" href="css/styles.css">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 </head>
 <body>
+  <div class="container-fluid">
+    <!-- Library Banner -->
+    <header class="row library-banner">
+      <div class="col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4 col-xs-8">
+        <h1 class="library-title text-center">Library</h1>
+      </div>
+      <div class="col-md-4 col-sm-4 col-xs-4">
+        <!-- Login -->
+        <form class="login-form pull-right">
+          <div class="form-group">
+            <label for="username-input" class="sr-only">Username</label>
+            <input id="username-input" class="form-control input-width" type="text" name="username" autocomplete="username" placeholder="Username" required>
+          </div>
+          <div class="form-group">
+            <label for="password-input" class="sr-only">Password</label>
+            <input id="password-input" class="form-control input-width" type="password" name="password" autocomplete="current-password" placeholder="Password" required>
+          </div>
+          <button class="btn btn-primary btn-sm login-button pull-right" type="submit">Login</button>
+        </form>
+      </div>
+    </header>
+    <!-- Search Bar -->
+    <section class="row search-library">
+      <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
+        <form class="form-group">
+          <label for="search-bar" class="sr-only">Search Bar</label>
+          <input id="search-bar" class="form-control center-block text-center" type="text" name="searchbar" placeholder="Title, author, page number, or publish date.">
+        </form>
+        <div class="recommend-wrap text-center">
+          <button class="btn btn-default btn-sm recommend-book-button" data-toggle="modal" data-target="#recommend-book">Recommend Book</button>
+          <button class="btn btn-default btn-sm recommend-author-button" data-toggle="modal" data-target="#recommend-author">Recommend Author</button>
+        </div>
+      </div>
+    </section>
+    <!-- Library Filter Buttons -->
+    <aside class="row filter-buttons">
+      <div class="col-md-4 col-sm-4 col-xs-6 show-all">
+        <button class="btn btn-default btn-sm all-books-button" data-toggle="modal" data-target="#show-all-books">All Books</button>
+        <button class="btn btn-default btn-sm all-authors-button" data-toggle="modal" data-target="#show-all-authors">All Authors</button>
+      </div>
+      <div class="col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4 col-xs-6 add-remove">
+        <button class="btn btn-default btn-sm pull-right remove-book-button" data-toggle="modal" data-target="#remove-book">Del. Book</button>
+        <button class="btn btn-default btn-sm pull-right add-book-button" data-toggle="modal" data-target="#add-book">Add Book</button>
+      </div>
+    </aside>
+    <!-- Table of Books -->
+    <main class="row bookshelf">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="table-responsive">
+          <table class="table table-bordered table-hover">
+            <thead>
+            <tr>
+              <th>Cover</th>
+              <th>Title</th>
+              <th>Author</th>
+              <th>Number of Pages</th>
+              <th>Publish Date</th>
+              <th>Edit</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td><img class="table-img center-block" src="assets/eye-of-the-world.jpg" alt="Book cover"></td>
+              <td contenteditable="true">Eye of the World</td>
+              <td contenteditable="true">Robert Jordan</td>
+              <td contenteditable="true">685</td>
+              <td contenteditable="true">January 15, 1990</td>
+              <td>
+                <span class="glyphicon glyphicon-pencil" role="button"></span>
+                <span class="glyphicon glyphicon-remove-circle" role="button"></span>
+              </td>
+            </tr>
+            <tr>
+              <td><img class="table-img center-block" src="assets/the-great-hunt.jpg" alt="Book cover"></td>
+              <td contenteditable="true">The Great Hunt</td>
+              <td contenteditable="true">Robert Jordan</td>
+              <td contenteditable="true">600</td>
+              <td contenteditable="true">November 15, 1990</td>
+              <td>
+                <span class="glyphicon glyphicon-pencil" role="button"></span>
+                <span class="glyphicon glyphicon-remove-circle" role="button"></span>
+              </td>
+            </tr>
+            <tr>
+              <td><img class="table-img center-block" src="assets/the-phantom-tollbooth.jpg" alt="Book cover"></td>
+              <td contenteditable="true">The Phantom Tollbooth</td>
+              <td contenteditable="true">Norton Juster</td>
+              <td contenteditable="true">255</td>
+              <td contenteditable="true">February 8, 1961</td>
+              <td>
+                <span class="glyphicon glyphicon-pencil" role="button"></span>
+                <span class="glyphicon glyphicon-remove-circle" role="button"></span>
+              </td>
+            </tr>
+            <tr>
+              <td><img class="table-img center-block" src="assets/lion-witch-wardrobe.jpg" alt="Book cover"></td>
+              <td contenteditable="true">The Lion, the Witch, and the Wardrobe</td>
+              <td contenteditable="true">C.S. Lewis</td>
+              <td contenteditable="true">208</td>
+              <td contenteditable="true">October 16, 1950</td>
+              <td>
+                <span class="glyphicon glyphicon-pencil" role="button"></span>
+                <span class="glyphicon glyphicon-remove-circle" role="button"></span>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+    <!-- Footer -->
+    <footer class="row text-center">
+      <div class="col-md-4 col-md-offset-4">
+        <p class="h5">&copy; Copyright 2018</p>
+      </div>
+    </footer>
+  <!-- Closing Container Fluid -->
+  </div>
+  <!-- Add Book Modal -->
+  <div class="modal fade" id="add-book" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Add Books</h4>
+        </div>
+        <div class="modal-body">
+          <form class="add-book-form">
+            <div class="form-group">
+              <label for="add-title-input">Title <sup>*</sup></label>
+              <input type="text" class="form-control" id="add-title-input" name="add-title" required>
+            </div>
+            <div class="form-group">
+              <label for="add-author-input">Author <sup>*</sup></label>
+              <input type="text" class="form-control" id="add-author-input" name="add-author" required>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="add-pages-input">Pages</label>
+                  <input type="number" class="form-control input-width" id="add-pages-input" name="add-pages">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="add-pub-input">Publication Date</label>
+                  <input type="date" class="form-control input-width" id="add-pub-input" name="add-pub">
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="browse-button">Book Cover</label>
+              <p><button type="button" class="btn btn-default" id="browse-button">Browse...</button>&emsp;No file selected.</p>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <div class="row">
+            <div class="col-md-6">
+              <button type="button" class="btn btn-default pull-left" id="queue-button">Queue Book To Add</button>
+            </div>
+            <div class="col-md-6">
+              <button type="button" class="btn btn-default" id="add-books-button">Add Books To Library</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Remove Book Modal -->
+  <div class="modal fade" id="remove-book" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Remove Books</h4>
+        </div>
+        <div class="modal-body">
+          <form class="remove-book-form">
+            <div class="form-group">
+              <label for="remove-title-input">Remove By Title</label>
+              <input type="text" class="form-control" id="remove-title-input" name="remove-title">
+            </div>
+            <div class="form-group">
+              <label for="remove-author-input">Remove By Author</label>
+              <input type="text" class="form-control" id="remove-author-input" name="remove-author">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" id="remove-books-button">Remove Books</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Show All Authors Modal -->
+  <div class="modal fade" id="show-all-authors" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">All Authors</h4>
+        </div>
+        <div class="modal-body">
+          <ul class="author-list">
+            <li>Robert Jordan</li>
+            <li>Norton Juster</li>
+            <li>C.S. Lewis</li>
+          </ul>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Show All Books Modal -->
+  <div class="modal fade" id="show-all-books" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">All Books</h4>
+        </div>
+        <div class="modal-body">
+          <ul class="book-list">
+            <li>Eye of the World</li>
+            <li>The Great Hunt</li>
+            <li>The Phantom Tollbooth</li>
+            <li>The Lion, the Witch, and the Wardrobe</li>
+          </ul>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Recommend Author Model -->
+  <div class="modal fade" id="recommend-author" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Author of the Day</h4>
+        </div>
+        <div class="modal-body">
+          <ul class="random-author-list">
+            <li>Robert Jordan</li>
+          </ul>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Recommend Book Modal -->
+  <div class="modal fade" id="recommend-book" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Book of the Day</h4>
+        </div>
+        <div class="row modal-body">
+          <div class="col-md-6">
+            <img class="img-responsive" src="assets/eye-of-the-world.jpg" alt="A book cover">
+          </div>
+          <div class="col-md-6">
+            <p class="h5">Eye of the World</p>
+            <p class="h5">Robert Jordan</p>
+            <p class="h5">685 Pages</p>
+            <p class="h5">January 15, 1990</p>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Scripts -->
+  <script src="scripts/jQuery.js"></script>
   <script src="scripts/bootstrap.js"></script>
   <script src="scripts/main.js"></script>
 </body>

@@ -1,0 +1,54 @@
+body {
+  background-image: url("../assets/parchment-paper.jpg");
+  background-size: cover;
+  font-family: "Open Sans", sans-serif;
+}
+
+header {
+  background-image: url("../assets/library-banner.png");
+}
+
+section {
+  margin: 1.5em 0;
+}
+
+main {
+  margin: 1.5em 0 0 0;
+}
+
+td,
+th {
+  font-size: 1.25em;
+  text-align: center;
+}
+
+.login-form {
+  margin: 1em 0;
+}
+
+.table-img {
+  height: 125px;
+  width: 75px;
+}
+
+.glyphicon-pencil {
+  display: block;
+  margin: 0.15em 0 0.75em 0;
+}
+
+.library-title {
+  color: #fffff0;
+  font-size: 4em;
+  font-weight: 900;
+  margin: 1.25em 0;
+  text-shadow: 0.05em 0.05em #000;
+}
+
+.remove-book-button {
+  margin: 0 0 0 0.25em;
+}
+
+#search-bar {
+  height: 3.5em;
+}
+
