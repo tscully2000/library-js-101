@@ -13,52 +13,51 @@
   <div class="container-fluid">
     <!-- Library Banner -->
     <header class="row library-banner">
-      <div class="col-md-4 col-md-offset-4">
-        <h1 class="library-title text-center">My Library</h1>
+      <div class="col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4 col-xs-8">
+        <h1 class="library-title text-center">Library</h1>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-4 col-sm-4 col-xs-4">
         <!-- Login -->
         <form class="login-form pull-right">
           <div class="form-group">
             <label for="username-input" class="sr-only">Username</label>
-            <input id="username-input" class="form-control input-width" type="text" name="username" autocomplete="username" placeholder="Username">
+            <input id="username-input" class="form-control input-width" type="text" name="username" autocomplete="username" placeholder="Username" required>
           </div>
           <div class="form-group">
             <label for="password-input" class="sr-only">Password</label>
-            <input id="password-input" class="form-control input-width" type="password" name="password" autocomplete="current-password" placeholder="Password">
+            <input id="password-input" class="form-control input-width" type="password" name="password" autocomplete="current-password" placeholder="Password" required>
           </div>
-          <button class="btn btn-primary login-button pull-right" type="submit">Login</button>
+          <button class="btn btn-primary btn-sm login-button pull-right" type="submit">Login</button>
         </form>
       </div>
     </header>
     <!-- Search Bar -->
     <section class="row search-library">
-      <div class="col-md-4 col-md-offset-4">
+      <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
         <form class="form-group">
           <label for="search-bar" class="sr-only">Search Bar</label>
-          <input id="search-bar" class="form-control center-block text-center" type="text" name="searchbar" placeholder="Please enter a title, author, page number, or publish date.">
+          <input id="search-bar" class="form-control center-block text-center" type="text" name="searchbar" placeholder="Title, author, page number, or publish date.">
         </form>
         <div class="recommend-wrap text-center">
-          <button class="btn btn-default recommend-book-button" data-toggle="modal" data-target="#recommend-book">Recommend Book</button>
-          <button class="btn btn-default recommend-author-button" data-toggle="modal" data-target="#recommend-author">Recommend Author</button>
+          <button class="btn btn-default btn-sm recommend-book-button" data-toggle="modal" data-target="#recommend-book">Recommend Book</button>
+          <button class="btn btn-default btn-sm recommend-author-button" data-toggle="modal" data-target="#recommend-author">Recommend Author</button>
         </div>
       </div>
     </section>
     <!-- Library Filter Buttons -->
     <aside class="row filter-buttons">
-      <div class="col-md-4 show-all">
-        <button class="btn btn-default all-books-button" data-toggle="modal" data-target="#show-all-books">Show All Books</button>
-        <button class="btn btn-default all-authors-button" data-toggle="modal" data-target="#show-all-authors">Show All Authors</button>
+      <div class="col-md-4 col-sm-4 col-xs-6 show-all">
+        <button class="btn btn-default btn-sm all-books-button" data-toggle="modal" data-target="#show-all-books">All Books</button>
+        <button class="btn btn-default btn-sm all-authors-button" data-toggle="modal" data-target="#show-all-authors">All Authors</button>
       </div>
-      <div class="col-md-4 empty"></div>
-      <div class="col-md-4 add-remove">
-        <button class="btn btn-default pull-right remove-book-button" data-toggle="modal" data-target="#remove-book">Remove Book</button>
-        <button class="btn btn-default pull-right add-book-button" data-toggle="modal" data-target="#add-book">Add Book</button>
+      <div class="col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4 col-xs-6 add-remove">
+        <button class="btn btn-default btn-sm pull-right remove-book-button" data-toggle="modal" data-target="#remove-book">Del. Book</button>
+        <button class="btn btn-default btn-sm pull-right add-book-button" data-toggle="modal" data-target="#add-book">Add Book</button>
       </div>
     </aside>
     <!-- Table of Books -->
     <main class="row bookshelf">
-      <div class="col-md-12">
+      <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="table-responsive">
           <table class="table table-bordered table-hover">
             <thead>
@@ -74,10 +73,10 @@
             <tbody>
             <tr>
               <td><img class="table-img center-block" src="assets/eye-of-the-world.jpg" alt="Book cover"></td>
-              <td>Eye of the World</td>
-              <td>Robert Jordan</td>
-              <td>685</td>
-              <td>January 15, 1990</td>
+              <td contenteditable="true">Eye of the World</td>
+              <td contenteditable="true">Robert Jordan</td>
+              <td contenteditable="true">685</td>
+              <td contenteditable="true">January 15, 1990</td>
               <td>
                 <span class="glyphicon glyphicon-pencil" role="button"></span>
                 <span class="glyphicon glyphicon-remove-circle" role="button"></span>
@@ -85,10 +84,10 @@
             </tr>
             <tr>
               <td><img class="table-img center-block" src="assets/the-great-hunt.jpg" alt="Book cover"></td>
-              <td>The Great Hunt</td>
-              <td>Robert Jordan</td>
-              <td>600</td>
-              <td>November 15, 1990</td>
+              <td contenteditable="true">The Great Hunt</td>
+              <td contenteditable="true">Robert Jordan</td>
+              <td contenteditable="true">600</td>
+              <td contenteditable="true">November 15, 1990</td>
               <td>
                 <span class="glyphicon glyphicon-pencil" role="button"></span>
                 <span class="glyphicon glyphicon-remove-circle" role="button"></span>
@@ -96,10 +95,10 @@
             </tr>
             <tr>
               <td><img class="table-img center-block" src="assets/the-phantom-tollbooth.jpg" alt="Book cover"></td>
-              <td>The Phantom Tollbooth</td>
-              <td>Norton Juster</td>
-              <td>255</td>
-              <td>February 8, 1961</td>
+              <td contenteditable="true">The Phantom Tollbooth</td>
+              <td contenteditable="true">Norton Juster</td>
+              <td contenteditable="true">255</td>
+              <td contenteditable="true">February 8, 1961</td>
               <td>
                 <span class="glyphicon glyphicon-pencil" role="button"></span>
                 <span class="glyphicon glyphicon-remove-circle" role="button"></span>
@@ -107,10 +106,10 @@
             </tr>
             <tr>
               <td><img class="table-img center-block" src="assets/lion-witch-wardrobe.jpg" alt="Book cover"></td>
-              <td>The Lion, the Witch, and the Wardrobe</td>
-              <td>C.S. Lewis</td>
-              <td>208</td>
-              <td>October 16, 1950</td>
+              <td contenteditable="true">The Lion, the Witch, and the Wardrobe</td>
+              <td contenteditable="true">C.S. Lewis</td>
+              <td contenteditable="true">208</td>
+              <td contenteditable="true">October 16, 1950</td>
               <td>
                 <span class="glyphicon glyphicon-pencil" role="button"></span>
                 <span class="glyphicon glyphicon-remove-circle" role="button"></span>
@@ -255,7 +254,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title">Author Of The Day</h4>
+          <h4 class="modal-title">Author of the Day</h4>
         </div>
         <div class="modal-body">
           <ul class="random-author-list">
@@ -274,7 +273,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title">Book Of The Day</h4>
+          <h4 class="modal-title">Book of the Day</h4>
         </div>
         <div class="row modal-body">
           <div class="col-md-6">
