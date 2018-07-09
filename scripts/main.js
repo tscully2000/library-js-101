@@ -1,14 +1,6 @@
-var Library;
-(function() {
-  var instance;
-  Library = function() {
-    if (instance) {
-      return instance;
-    };
-    instance = this;
-    this.key = 'myLibrary';
-  };
-})();
+var Library = function() {
+  this.key = 'myLibrary';
+};
 
 Library.prototype.addBook = function(book) {
   if (book) {
@@ -17,7 +9,7 @@ Library.prototype.addBook = function(book) {
         return false;
       };
     };
-    window.bookShelf.push(book);
+    window.bookShelf.push(new Book(book));
     this.setObject();
     return true;
   };
@@ -176,8 +168,9 @@ Library.prototype.getObject = function() {
     for (var i = 0; i < books.length; i++) {
       myShelf.push(new Book(books[i].title, books[i].author, books[i].numberOfPages, books[i].publishDate));
     };
+    return window.bookShelf = myShelf;
   };
-  return window.bookShelf = myShelf;
+  return myShelf;
 };
 
 var book1 = new Book ('Eye of the World', 'Robert Jordan', 685, 'January 15, 1990');

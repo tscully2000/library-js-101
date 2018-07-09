@@ -1,6 +1,6 @@
 var Book = function(title, author, numberOfPages, publishDate) {
   this.title = title;
   this.author = author;
-  this.numberOfPages = numberOfPages;
-  this.publishDate = new Date(publishDate.toString()).getUTCFullYear();
+  this.numberOfPages = parseInt(numberOfPages);
+  this.publishDate = new Date(publishDate).getUTCFullYear();
 };
