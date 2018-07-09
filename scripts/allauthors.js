@@ -1,6 +1,6 @@
 var AllAuthors = function(container) {
-  this.$container = container;
   Library.call(this);
+  this.$container = container;
 };
 
 AllAuthors.prototype = Object.create(Library.prototype);
@@ -11,7 +11,7 @@ AllAuthors.prototype.init = function() {
 };
 
 AllAuthors.prototype._bindEvents = function() {
-  $('.all-authors-button').on('click', $.proxy(this._handleAllAuthors, this));
+  $('#all-authors-button').on('click', $.proxy(this._handleAllAuthors, this));
 };
 
 AllAuthors.prototype._handleAllAuthors = function() {
@@ -27,15 +27,15 @@ AllAuthors.prototype._handleAllAuthors = function() {
 
 AllAuthors.prototype._createAuthorList = function(authors) {
   var ul = document.createElement('ul');
-  for (var i = 0; i < authors.lengh; i++) {
+  for (var i = 0; i < authors.length; i++) {
     var li = document.createElement('li');
     $(li).text(authors[i]);
     ul.append(li);
-  }
+  };
   return ul;
-}
+};
 
 $(function() {
-  window.gAllAuthors = new AllAuthors('#show-all-authors');
+  window.gAllAuthors = new AllAuthors($('#show-all-authors'));
   window.gAllAuthors.init();
 });

@@ -48,11 +48,11 @@
     <aside class="row filter-buttons">
       <div class="col-md-4 col-sm-4 col-xs-6 show-all">
         <button class="btn btn-default btn-sm all-books-button" data-toggle="modal" data-target="#show-all-books">All Books</button>
-        <button class="btn btn-default btn-sm all-authors-button" data-toggle="modal" data-target="#show-all-authors">All Authors</button>
+        <button class="btn btn-default btn-sm" id="all-authors-button">All Authors</button>
       </div>
       <div class="col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4 col-xs-6 add-remove">
         <button class="btn btn-default btn-sm pull-right remove-book-button" data-toggle="modal" data-target="#remove-book">Del. Book</button>
-        <button class="btn btn-default btn-sm pull-right add-book-button" data-toggle="modal" data-target="#add-book">Add Book</button>
+        <button class="btn btn-default btn-sm pull-right" id="add-book-button">Add Book</button>
       </div>
     </aside>
     <!-- Table of Books -->
@@ -293,9 +293,12 @@
     </div>
   </div>
   <!-- Scripts -->
+  <script src="scripts/book.js"></script>
   <script src="scripts/jQuery.js"></script>
   <script src="scripts/bootstrap.js"></script>
   <script src="scripts/main.js"></script>
+  <script src="scripts/util.js"></script>
   <script src="scripts/allauthors.js"></script>
+  <script src="scripts/addbooks.js"></script>
 </body>
 </html>
