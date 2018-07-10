@@ -50,7 +50,7 @@
         <button class="btn btn-default btn-sm all-books-button" data-toggle="modal" data-target="#show-all-books">All Books</button>
         <button class="btn btn-default btn-sm" id="all-authors-button">All Authors</button>
       </div>
-      <div class="col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4 col-xs-6 add-remove">
+      <div class="col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4 col-xs-6" id="add-remove">
         <button class="btn btn-default btn-sm pull-right remove-book-button" data-toggle="modal" data-target="#remove-book">Del. Book</button>
         <button class="btn btn-default btn-sm pull-right" id="add-book-button">Add Book</button>
       </div>
@@ -70,46 +70,13 @@
               <th>Edit</th>
             </tr>
             </thead>
-            <tbody>
+            <tbody id="book-table-body">
             <tr>
               <td><img class="table-img center-block" src="assets/eye-of-the-world.jpg" alt="Book cover"></td>
-              <td class="book-title" contenteditable="true">Eye of the World</td>
-              <td class="book-author" contenteditable="true">Robert Jordan</td>
-              <td class="book-pages" contenteditable="true">685</td>
-              <td class="book-pub" contenteditable="true">January 15, 1990</td>
-              <td>
-                <span class="glyphicon glyphicon-pencil" role="button"></span>
-                <span class="glyphicon glyphicon-remove-circle" role="button"></span>
-              </td>
-            </tr>
-            <tr>
-              <td><img class="table-img center-block" src="assets/the-great-hunt.jpg" alt="Book cover"></td>
-              <td contenteditable="true">The Great Hunt</td>
+              <td contenteditable="true">Eye of the World</td>
               <td contenteditable="true">Robert Jordan</td>
-              <td contenteditable="true">600</td>
-              <td contenteditable="true">November 15, 1990</td>
-              <td>
-                <span class="glyphicon glyphicon-pencil" role="button"></span>
-                <span class="glyphicon glyphicon-remove-circle" role="button"></span>
-              </td>
-            </tr>
-            <tr>
-              <td><img class="table-img center-block" src="assets/the-phantom-tollbooth.jpg" alt="Book cover"></td>
-              <td contenteditable="true">The Phantom Tollbooth</td>
-              <td contenteditable="true">Norton Juster</td>
-              <td contenteditable="true">255</td>
-              <td contenteditable="true">February 8, 1961</td>
-              <td>
-                <span class="glyphicon glyphicon-pencil" role="button"></span>
-                <span class="glyphicon glyphicon-remove-circle" role="button"></span>
-              </td>
-            </tr>
-            <tr>
-              <td><img class="table-img center-block" src="assets/lion-witch-wardrobe.jpg" alt="Book cover"></td>
-              <td contenteditable="true">The Lion, the Witch, and the Wardrobe</td>
-              <td contenteditable="true">C.S. Lewis</td>
-              <td contenteditable="true">208</td>
-              <td contenteditable="true">October 16, 1950</td>
+              <td contenteditable="true">685</td>
+              <td contenteditable="true">January 15, 1990</td>
               <td>
                 <span class="glyphicon glyphicon-pencil" role="button"></span>
                 <span class="glyphicon glyphicon-remove-circle" role="button"></span>
@@ -161,8 +128,8 @@
               </div>
             </div>
             <div class="form-group">
-              <label for="browse-button">Book Cover</label>
-              <p><button type="button" class="btn btn-default" id="browse-button">Browse...</button>&emsp;No file selected.</p>
+              <label for="cover-input">Book Cover</label>
+              <input type="file" name="cover" id="cover-input">
             </div>
           </form>
         </div>

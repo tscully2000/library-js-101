@@ -6,7 +6,7 @@ var AllAuthors = function(container) {
 AllAuthors.prototype = Object.create(Library.prototype);
 
 AllAuthors.prototype.init = function() {
-  this.getObject();
+  // this.getObject();
   this._bindEvents();
 };
 
