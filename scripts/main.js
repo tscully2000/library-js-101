@@ -5,11 +5,11 @@ var Library = function() {
 Library.prototype.addBook = function(book) {
   if (book) {
     for (var i = 0; i < window.bookShelf.length; i++) {
-      if (window.bookShelf[i].title.indexOf(book.title) > -1 || Array.isArray(book)) {
+      if (window.bookShelf[i].title.indexOf(book.title) > -1) {
         return false;
       };
     };
-    window.bookShelf.push(new Book(book));
+    window.bookShelf.push(book);
     this.setObject();
     return true;
   };
@@ -20,7 +20,7 @@ Library.prototype.addBooks = function(books) {
   if (books) {
     var bookCount = 0;
     for (var i = 0; i < books.length; i++) {
-      if (this.addBook(books[i]) && Array.isArray(books)) {
+      if (this.addBook(books[i])) {
         bookCount++;
       };
     };

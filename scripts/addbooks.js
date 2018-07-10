@@ -27,26 +27,28 @@ AddBooks.prototype._queueBooks = function() {
   $.each(qBooks, function(i, book) {
     book.value ? qBooksToAdd[book.name] = book.value : hasVal = false;
   });
-  hasVal ? this._tempBookShelf.push(qBooksToAdd) : alert('Error: Please fill out all form fields!');
+  hasVal ? this._tempBookShelf.push(new Book(qBooksToAdd.title, qBooksToAdd.author, qBooksToAdd.numberOfPages, qBooksToAdd.publishDate)) : alert('Error: Please fill out all form fields!');
   $('.book-count').text(this._tempBookShelf.length);
   $('#add-book-form')[0].reset();
-  return qBooksToAdd;
+  return;
 };
-
+// Why won't this.addBooks work?
 AddBooks.prototype._createTableElements = function() {
-  var booksToAdd = gAddBooks.addBooks(this._queueBooks),
-      tr = document.createElement('tr');
-  $.each(booksToAdd, function(i, book) {
+  gAddBooks.addBooks(this._tempBookShelf);
+  var tr = document.createElement('tr');
+  $.each(window.bookShelf, function(i, book) {
     var td = document.createElement('td');
-    $(td).text(book[i]);
+    $(td).text(book.title, book.author, book.numberOfPages, book.publishDate);
     tr.append(td);
   });
   return tr;
 };
 
 AddBooks.prototype._addToTable = function() {
-  $('#book-table').find('tbody').html(this._createTableElements);
+  $('#book-table').find('tbody').html(this._createTableElements());
+  $('.book-count').text(0);
   this._tempBookShelf = [];
+  this.$container.modal('hide');
 };
 
 $(function() {
