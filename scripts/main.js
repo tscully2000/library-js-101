@@ -2,13 +2,23 @@ var Library = function() {
   this.key = 'myLibrary';
 };
 
-Library.prototype.addBook = function(book) {
-  if (book) {
-    for (var i = 0; i < window.bookShelf.length; i++) {
-      if (window.bookShelf[i].title.indexOf(book.title) > -1) {
-        return false;
-      };
+Library.prototype._handleEventTrigger = function(sEvent, oData) {
+  var oData = oData || {},
+      event = new CustomEvent(sEvent, oData);
+  document.dispatchEvent(event);
+};
+
+Library.prototype.checkForDup = function(book) {
+  for (var i = 0; i < window.bookShelf.length; i++) {
+    if (window.bookShelf[i].title.indexOf(book.title) > -1) {
+      return false;
     };
+  };
+  return true;
+};
+
+Library.prototype.addBook = function(book) {
+  if (this.checkForDup(book)) {
     window.bookShelf.push(book);
     this.setObject();
     return true;
@@ -17,17 +27,14 @@ Library.prototype.addBook = function(book) {
 };
 
 Library.prototype.addBooks = function(books) {
-  if (books) {
-    var bookCount = 0;
-    for (var i = 0; i < books.length; i++) {
-      if (this.addBook(books[i])) {
-        bookCount++;
-      };
+  var bookCount = 0;
+  for (var i = 0; i < books.length; i++) {
+    if (this.addBook(books[i])) {
+      bookCount++;
     };
-    this.setObject();
-    return bookCount;
   };
-  return false;
+  this._handleEventTrigger('objUpdate', {details: 'this is a test'})
+  return bookCount;
 };
 
 Library.prototype.removeBookByTitle = function(title) {
@@ -166,7 +173,7 @@ Library.prototype.getObject = function() {
   if (localStorage.length > 0) {
     var books = JSON.parse(localStorage.getItem(this.key));
     for (var i = 0; i < books.length; i++) {
-      myShelf.push(new Book(books[i].title, books[i].author, books[i].numberOfPages, books[i].publishDate));
+      myShelf.push(new Book(books[i]));
     };
     return window.bookShelf = myShelf;
   };

@@ -24,7 +24,7 @@ AddBooks.prototype._queueBooks = function() {
   $.each(qBooks, function(i, book) {
     book.value ? qBooksToAdd[book.name] = book.value : hasVal = false;
   });
-  hasVal ? this._tempBookShelf.push(new Book(qBooksToAdd)) : alert('Error: Please fill out all form fields!');
+  this.checkForDup(qBooksToAdd) && hasVal ? this._tempBookShelf.push(new Book(qBooksToAdd)) : alert('Existing title or empty input field');
   this.$container.find('.book-count').text(this._tempBookShelf.length);
   this.$container.find('#add-book-form')[0].reset();
   return;
@@ -33,7 +33,6 @@ AddBooks.prototype._queueBooks = function() {
 
 AddBooks.prototype._addToTable = function() {
   if (this.addBooks(this._tempBookShelf)) {
-    $('#book-table-body').html(this._updateTable());
     this.$container.find('.book-count').text(0);
     this._tempBookShelf = [];
   } else {
