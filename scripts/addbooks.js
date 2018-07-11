@@ -37,7 +37,6 @@ AddBooks.prototype._queueBooks = function() {
 };
 
 AddBooks.prototype._createTableElements = function() {
-  gAddBooks.addBooks(this._tempBookShelf);
   var tr = document.createElement('tr');
   $.each(window.bookShelf, function(i, book) {
     var td = document.createElement('td');
@@ -48,8 +47,8 @@ AddBooks.prototype._createTableElements = function() {
 };
 
 AddBooks.prototype._addToTable = function() {
-  if (this._tempBookShelf.length > 0) {
-    $('#book-table-body').html(this._createTableElements());
+  if (this.addBooks(this._tempBookShelf)) {
+    $('#book-table').find('#book-table-body').html(this._createTableElements());
     this.$container.find('.book-count').text(0);
     this._tempBookShelf = [];
     this.$container.modal('hide');
