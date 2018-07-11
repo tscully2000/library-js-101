@@ -24,27 +24,16 @@ AddBooks.prototype._queueBooks = function() {
   $.each(qBooks, function(i, book) {
     book.value ? qBooksToAdd[book.name] = book.value : hasVal = false;
   });
-  hasVal ? this._tempBookShelf.push(new Book(qBooksToAdd.title, qBooksToAdd.author, qBooksToAdd.numberOfPages, qBooksToAdd.publishDate)) : alert('Error: Please fill out all form fields!');
+  hasVal ? this._tempBookShelf.push(new Book(qBooksToAdd)) : alert('Error: Please fill out all form fields!');
   this.$container.find('.book-count').text(this._tempBookShelf.length);
   this.$container.find('#add-book-form')[0].reset();
   return;
 };
 
-AddBooks.prototype._createTableElements = function() {
-  var tr = document.createElement('tr');
-  $.each(window.bookShelf, function(i, book) {
-    var td = document.createElement('td');
-    for (var key in book) {
-      $(td).text(key);
-      tr.append(td);
-    };
-  });
-  return tr;
-};
 
 AddBooks.prototype._addToTable = function() {
   if (this.addBooks(this._tempBookShelf)) {
-    $('#book-table').find('#book-table-body').html(this._createTableElements());
+    $('#book-table-body').html(this._updateTable());
     this.$container.find('.book-count').text(0);
     this._tempBookShelf = [];
   } else {
