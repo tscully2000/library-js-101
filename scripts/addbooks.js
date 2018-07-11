@@ -12,14 +12,8 @@ AddBooks.prototype.init = function() {
 };
 
 AddBooks.prototype._bindEvents = function() {
-  $('#add-remove').find('#add-book-button').on('click', $.proxy(this._handleModalOpen, this));
   this.$container.find('#queue-button').on('click', $.proxy(this._queueBooks, this));
   this.$container.find('#add-books-button').on('click', $.proxy(this._addToTable, this));
-  return;
-};
-
-AddBooks.prototype._handleModalOpen = function() {
-  this.$container.modal('show');
   return;
 };
 
@@ -40,8 +34,10 @@ AddBooks.prototype._createTableElements = function() {
   var tr = document.createElement('tr');
   $.each(window.bookShelf, function(i, book) {
     var td = document.createElement('td');
-    $(td).text(book.title, book.author, book.numberOfPages, book.publishDate);
-    tr.append(td);
+    for (var key in book) {
+      $(td).text(key);
+      tr.append(td);
+    };
   });
   return tr;
 };
@@ -51,7 +47,6 @@ AddBooks.prototype._addToTable = function() {
     $('#book-table').find('#book-table-body').html(this._createTableElements());
     this.$container.find('.book-count').text(0);
     this._tempBookShelf = [];
-    this.$container.modal('hide');
   } else {
     alert('Please add a book to the queue');
   };

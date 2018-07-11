@@ -1,4 +1,4 @@
-var AllAuthors = function(container) {
+var AllAuthors = function() {
   Library.call(this);
   this.$container = $('#show-all-authors');
 };
