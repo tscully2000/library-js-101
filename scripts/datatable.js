@@ -28,10 +28,12 @@ DataTable.prototype._updateTable = function() {
       $tbody = this.$container.find('#book-table-body');
   $thead.empty();
   $tbody.empty();
-  $thead.append(_self._createHeader());
-  $.each(window.bookShelf, function(i, book) {
-    $tbody.append(_self._createRow(book));
-  });
+  if (window.bookShelf.length > 0) {
+    $thead.append(_self._createHeader());
+    $.each(window.bookShelf, function(i, book) {
+      $tbody.append(_self._createRow(book));
+    });
+  };
   return;
 };
 
@@ -75,6 +77,7 @@ DataTable.prototype._deleteRow = function(e) {
   var $target = $(e.currentTarget).closest('tr');
   if (this.removeBookByTitle($target.attr('data-id'))) {
     $target.remove();
+    this._updateTable();
     return true;
   } else {
     alert('Unable to remove book from library. Please try again.')

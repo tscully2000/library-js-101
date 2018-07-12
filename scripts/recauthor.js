@@ -17,7 +17,7 @@ RecAuthor.prototype._bindEvents = function() {
 
 RecAuthor.prototype._handleRecAuthor = function() {
   var recAuthor = this.getRandomAuthorName();
-  if (recAuthor.length) {
+  if (recAuthor) {
     this.$container.modal('show');
     this.$container.find('.modal-body').html(this._createRecAuthorList(recAuthor));
   } else {

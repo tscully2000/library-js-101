@@ -20,7 +20,6 @@ AllBooks.prototype._handleAllBooks = function() {
   for (var i = 0; i < window.bookShelf.length; i++) {
     books.push(window.bookShelf[i].title);
   };
-  console.log(books);
   if (books.length) {
     this.$container.modal('show');
     this.$container.find('.modal-body').html(this._createBookList(books));
