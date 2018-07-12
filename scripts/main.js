@@ -53,17 +53,18 @@ Library.prototype.removeBookByTitle = function(title) {
 };
 
 Library.prototype.removeBookByAuthor = function(authorName) {
+  var result = false;
   if (authorName) {
     for (var i = window.bookShelf.length - 1; i >= 0; i--) {
       if (window.bookShelf[i].author.toLowerCase() === authorName.toLowerCase().trim()) {
         window.bookShelf.splice(i, 1);
-        var result = true;
+        result = true;
       };
     };
     this.setObject();
     return result;
   };
-  return false;
+  return result;
 };
 
 Library.prototype.removeAllBooks = function() {

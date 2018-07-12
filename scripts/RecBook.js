@@ -16,22 +16,25 @@ RecBook.prototype._bindEvents = function() {
 };
 
 RecBook.prototype._handleRecBook = function() {
-  var RecBook = this.getRandomBook();
-  if (RecBook) {
+  var recBook = this.getRandomBook();
+  if (recBook) {
     this.$container.modal('show');
-    this.$container.find('.modal-body').html(this._createRecBookList(RecBook));
+    this.$container.find('.modal-body').html(this._createRecBook(recBook));
   } else {
     alert('Nothing in library!');
   };
   return false;
 };
 
-RecBook.prototype._createRecBookList = function(RecBook) {
-  var ul = document.createElement('ul'),
-      li = document.createElement('li');
-  $(li).text(RecBook);
-  ul.append(li);
-  return ul;
+RecBook.prototype._createRecBook = function(recBook) {
+  var div = document.createElement('div');
+  $(div).addClass('col-md-12');
+  for (var key in recBook) {
+    var p = document.createElement('p');
+    $(p).text(recBook[key]);
+    div.append(p);
+  };
+  return div;
 };
 
 $(function() {
