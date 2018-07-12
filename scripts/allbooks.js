@@ -18,8 +18,9 @@ AllBooks.prototype._bindEvents = function() {
 AllBooks.prototype._handleAllBooks = function() {
   var books = [];
   for (var i = 0; i < window.bookShelf.length; i++) {
-    books.push(window.bookShelf[i].title)
+    books.push(window.bookShelf[i].title);
   };
+  console.log(books);
   if (books.length) {
     this.$container.modal('show');
     this.$container.find('.modal-body').html(this._createBookList(books));
@@ -33,7 +34,7 @@ AllBooks.prototype._createBookList = function(books) {
   var ul = document.createElement('ul');
   for (var i = 0; i < books.length; i++) {
     var li = document.createElement('li');
-    $(li).text([i]);
+    $(li).text(books[i]);
     ul.append(li);
   };
   return ul;

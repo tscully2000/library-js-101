@@ -8,16 +8,18 @@ DataTable.prototype = Object.create(Library.prototype);
 DataTable.prototype.init = function() {
   this.getObject();
   this._updateTable();
-  // this._bindEvents();
+  this._bindEvents();
   this._bindCustomEvents();
 };
 
 DataTable.prototype._bindEvents = function() {
-//  Native shiz hurrrr
+  this.$container.on('click', '.glyphicon-remove-circle', $.proxy(this._deleteRow, this));
+  return;
 };
 
 DataTable.prototype._bindCustomEvents = function() {
   $(document).on('objUpdate', $.proxy(this._updateTable, this));
+  return;
 };
 
 DataTable.prototype._updateTable = function() {
@@ -30,24 +32,19 @@ DataTable.prototype._updateTable = function() {
   $.each(window.bookShelf, function(i, book) {
     $tbody.append(_self._createRow(book));
   });
+  return;
 };
 
 DataTable.prototype._createHeader = function() {
-  var tr = document.createElement('tr'),
-      th1 = document.createElement('th'),
-      th2 = document.createElement('th'),
-      th3 = document.createElement('th'),
-      th4 = document.createElement('th'),
-      th5 = document.createElement('th'),
-      th6 = document.createElement('th');
-  $(th1).text('Cover');
-  $(th2).text('Title');
-  $(th3).text('Author');
-  $(th4).text('Pages');
-  $(th5).text('Publish Date');
-  $(th6).text('Edit');
-  tr.append(th1, th2, th3, th4, th5, th6);
+  var headers = ['Cover', 'Title', 'Author', 'Pages', 'Publish Date', 'Edit'],
+      tr = document.createElement('tr');
+  $.each(headers, function(i, header) {
+    var th = document.createElement('th');
+    $(th).text(header);
+    tr.append(th);
+  });
   return tr;
+};
       // book = window.bookShelf[0];
   // for (var key in book) {
   //   var th = document.createElement('th');
@@ -57,12 +54,12 @@ DataTable.prototype._createHeader = function() {
   // var editTh = document.createElement('th');
   // $(editTh).text('Edit');
   // tr.append(editTh);
-};
 
 DataTable.prototype._createRow = function(book) {
   var tr = document.createElement('tr'),
       editTd = document.createElement('td'),
       editGlyph = document.createElement('span');
+  tr.setAttribute('data-id', book.title);
   $(editGlyph).addClass('glyphicon glyphicon-remove-circle btn');
   editTd.append(editGlyph);
   for (var key in book) {
@@ -72,6 +69,17 @@ DataTable.prototype._createRow = function(book) {
   };
   tr.append(editTd);
   return tr;
+};
+
+DataTable.prototype._deleteRow = function(e) { 
+  var $target = $(e.currentTarget).closest('tr');
+  if (this.removeBookByTitle($target.attr('data-id'))) {
+    $target.remove();
+    return true;
+  } else {
+    alert('Unable to remove book from library. Please try again.')
+  };
+  return;
 };
 
 $(function() {

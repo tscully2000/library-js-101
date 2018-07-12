@@ -38,17 +38,18 @@ Library.prototype.addBooks = function(books) {
 };
 
 Library.prototype.removeBookByTitle = function(title) {
+  var wasRemoved = false; 
   if (title) {
     for (var i = 0; i < window.bookShelf.length; i++) {
       if (window.bookShelf[i].title.toLowerCase() === title.toLowerCase().trim()) {
         window.bookShelf.splice(i, 1);
-        return true;
+        wasRemoved = true;
       };
     };
     this.setObject();
-    return false;
+    return wasRemoved;
   };
-  return false;
+  return wasRemoved;
 };
 
 Library.prototype.removeBookByAuthor = function(authorName) {

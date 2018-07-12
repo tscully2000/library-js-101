@@ -47,7 +47,7 @@
     <!-- Library Filter Buttons -->
     <aside class="row filter-buttons">
       <div class="col-md-4 col-sm-4 col-xs-6" id="show-all">
-        <button class="btn btn-default btn-sm all-books-button">All Books</button>
+        <button class="btn btn-default btn-sm" id="all-books-button">All Books</button>
         <button class="btn btn-default btn-sm" id="all-authors-button">All Authors</button>
       </div>
       <div class="col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4 col-xs-6" id="add-remove">
@@ -61,17 +61,9 @@
         <div class="table-responsive">
           <table class="table table-bordered table-hover" id="book-table">
             <thead id="book-table-head">
-            <tr>
-              <th>Cover</th>
-              <th>Title</th>
-              <th>Author</th>
-              <th>Number of Pages</th>
-              <th>Publish Date</th>
-              <th>Edit</th>
-            </tr>
             </thead>
             <tbody id="book-table-body">
-            <tr>
+            <!-- <tr>
               <td><img class="table-img center-block" src="assets/eye-of-the-world.jpg" alt="Book cover"></td>
               <td contenteditable="true">Eye of the World</td>
               <td contenteditable="true">Robert Jordan</td>
@@ -81,7 +73,7 @@
                 <span class="glyphicon glyphicon-pencil" role="button"></span>
                 <span class="glyphicon glyphicon-remove-circle" role="button"></span>
               </td>
-            </tr>
+            </tr> -->
             </tbody>
           </table>
         </div>
