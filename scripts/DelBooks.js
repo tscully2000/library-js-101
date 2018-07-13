@@ -15,11 +15,8 @@ DelBooks.prototype._bindEvents = function() {
 };
 
 DelBooks.prototype._removeFromTable = function() {
-  var removeByTitle = this.$container.find('#remove-title-input'),
-      titleInput = $(removeByTitle).val(),
-      removeByAuthor = this.$container.find('#remove-author-input'),
+  var removeByAuthor = this.$container.find('#remove-author-input'),
       authorInput = $(removeByAuthor).val();
-  this.removeBookByTitle(titleInput);
   this.removeBookByAuthor(authorInput);
   // this.$container.find('#remove-book-form')[0].reset();
   return;

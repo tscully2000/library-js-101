@@ -132,6 +132,7 @@ Library.prototype.searchShelf = function(args) {
   if (args) {
     var foundBooks = this.getBookByTitle(args).concat(this.getBooksByAuthor(args), this.getPubDate(args), this.getNumPage(args));
     if (foundBooks.length < 1) {
+      alert('No books found.');
       return false;
     };
     var filteredBooks = foundBooks.filter(function(value, index, self) {

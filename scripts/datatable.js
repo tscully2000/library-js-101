@@ -47,15 +47,6 @@ DataTable.prototype._createHeader = function() {
   });
   return tr;
 };
-      // book = window.bookShelf[0];
-  // for (var key in book) {
-  //   var th = document.createElement('th');
-  //   $(th).text(key);
-  //   tr.append(th);
-  // };
-  // var editTh = document.createElement('th');
-  // $(editTh).text('Edit');
-  // tr.append(editTh);
 
 DataTable.prototype._createRow = function(book) {
   var tr = document.createElement('tr'),

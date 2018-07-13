@@ -19,7 +19,7 @@ RecBook.prototype._handleRecBook = function() {
   var recBook = this.getRandomBook();
   if (recBook) {
     this.$container.modal('show');
-    this.$container.find('.modal-body').html(this._createRecBook(recBook));
+    this._createRecBook(recBook);
   } else {
     alert('Nothing in library!');
   };
@@ -27,14 +27,12 @@ RecBook.prototype._handleRecBook = function() {
 };
 
 RecBook.prototype._createRecBook = function(recBook) {
-  var div = document.createElement('div');
-  $(div).addClass('col-md-12');
-  for (var key in recBook) {
-    var p = document.createElement('p');
-    $(p).text(recBook[key]);
-    div.append(p);
-  };
-  return div;
+  this.$container.find('.cover-img').attr('src', recBook.cover);
+  this.$container.find('.rec-title').text('Title: ' + recBook.title);
+  this.$container.find('.rec-author').text('Author: ' + recBook.author);
+  this.$container.find('.rec-pages').text('Pages: ' + recBook.numberOfPages);
+  this.$container.find('.rec-pub').text('Publish Date: ' + recBook.publishDate);
+  return;
 };
 
 $(function() {

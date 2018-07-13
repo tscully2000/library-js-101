@@ -121,7 +121,7 @@
             </div>
             <div class="form-group">
               <label for="cover-input">Book Cover</label>
-              <input type="file" name="cover" id="cover-input">
+              <input type="file" accept=".txt" name="cover" id="cover-input">
             </div>
           </form>
         </div>
@@ -148,11 +148,7 @@
           <h4 class="modal-title">Remove Books</h4>
         </div>
         <div class="modal-body">
-          <form class="remove-book-form">
-            <div class="form-group">
-              <label for="remove-title-input">Remove By Title</label>
-              <input type="text" class="form-control" id="remove-title-input" name="remove-title">
-            </div>
+          <form id="remove-book-form">
             <div class="form-group">
               <label for="remove-author-input">Remove By Author</label>
               <input type="text" class="form-control" id="remove-author-input" name="remove-author">
@@ -222,14 +218,14 @@
           <h4 class="modal-title">Book of the Day</h4>
         </div>
         <div class="row modal-body">
-          <div class="col-md-6">
-            <img class="img-responsive" src="assets/eye-of-the-world.jpg" alt="A book cover">
+          <div class="col-md-6 img-div">
+            <img class="img-responsive cover-img" alt="A book cover">
           </div>
           <div class="col-md-6">
-            <p class="h5">Eye of the World</p>
-            <p class="h5">Robert Jordan</p>
-            <p class="h5">685 Pages</p>
-            <p class="h5">January 15, 1990</p>
+            <p class="h5 rec-title"></p>
+            <p class="h5 rec-author"></p>
+            <p class="h5 rec-pages"></p>
+            <p class="h5 rec-pub"></p>
           </div>
         </div>
         <div class="modal-footer">

@@ -12,13 +12,13 @@ SearchBar.prototype.init = function() {
 
 SearchBar.prototype._bindEvents = function() {
   this.$container.on('submit', $.proxy(this._searchTable, this));
+  return;
 };
 
 SearchBar.prototype._searchTable = function(e) {
   e.preventDefault();
   var searchInput = this.$container.find('#search-bar').val();
   this.searchShelf(searchInput);
-  // this.$container.reset();
   return;
 };
 
