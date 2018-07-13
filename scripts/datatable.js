@@ -52,13 +52,22 @@ DataTable.prototype._createRow = function(book) {
   var tr = document.createElement('tr'),
       editTd = document.createElement('td'),
       editGlyph = document.createElement('span');
-  tr.setAttribute('data-id', book.title);
+  $(tr).attr('data-id', book.title);
   $(editGlyph).addClass('glyphicon glyphicon-remove-circle btn');
   editTd.append(editGlyph);
   for (var key in book) {
     var td = document.createElement('td');
-    $(td).text(book[key]);
-    tr.append(td);
+    if (key === 'cover') {
+      var coverImg = document.createElement('img');
+      $(coverImg).addClass('table-img');
+      $(coverImg).attr('src', book.cover);
+      $(td).append(coverImg);
+      tr.append(td);
+    } else {
+      $(td).attr('contenteditable', 'true');
+      $(td).text(book[key]);
+      tr.append(td);
+    };
   };
   tr.append(editTd);
   return tr;

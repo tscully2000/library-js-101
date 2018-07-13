@@ -18,18 +18,24 @@ AddBooks.prototype._bindEvents = function() {
 };
 
 AddBooks.prototype._queueBooks = function() {
-  var qBooks = this.$container.find('#add-book-form').serializeArray(),
+  var _self = this;
+      qBooks = this.$container.find('#add-book-form').serializeArray(),
       qBooksToAdd = {},
       hasVal = true;
-  $.each(qBooks, function(i, book) {
-    book.value ? qBooksToAdd[book.name] = book.value : hasVal = false;
-  });
-  this.checkForDup(qBooksToAdd) && hasVal ? this._tempBookShelf.push(new Book(qBooksToAdd)) : alert('Existing title or empty input field');
-  this.$container.find('.book-count').text(this._tempBookShelf.length);
-  this.$container.find('#add-book-form')[0].reset();
+      file = $('#cover-input')[0].files[0];
+      reader  = new FileReader();
+  reader.onload = function() {
+    qBooks.push({name: 'cover', value: reader.result});
+    $.each(qBooks, function(i, book) {
+      book.value ? qBooksToAdd[book.name] = book.value : hasVal = false;
+    });
+    _self.checkForDup(qBooksToAdd) && hasVal ? _self._tempBookShelf.push(new Book(qBooksToAdd)) : alert('Existing title or empty input field');
+    _self.$container.find('.book-count').text(_self._tempBookShelf.length);
+    _self.$container.find('#add-book-form')[0].reset();
+  };
+  reader.readAsDataURL(file);
   return;
 };
-
 
 AddBooks.prototype._addToTable = function() {
   if (this.addBooks(this._tempBookShelf)) {
