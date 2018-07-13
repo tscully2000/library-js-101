@@ -137,7 +137,9 @@ Library.prototype.searchShelf = function(args) {
     var filteredBooks = foundBooks.filter(function(value, index, self) {
       return self.indexOf(value) === index;
     });
-    return filteredBooks;
+    window.bookShelf = filteredBooks;
+    this._handleEventTrigger('objUpdate');
+    return;
   };
   return false;
 };
