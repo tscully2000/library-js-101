@@ -21,7 +21,6 @@ DelBooks.prototype._removeFromTable = function() {
       authorInput = $(removeByAuthor).val();
   this.removeBookByTitle(titleInput);
   this.removeBookByAuthor(authorInput);
-  gDataTable._updateTable();
   // this.$container.find('#remove-book-form')[0].reset();
   return;
 };

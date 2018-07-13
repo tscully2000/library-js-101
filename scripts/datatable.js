@@ -77,7 +77,6 @@ DataTable.prototype._deleteRow = function(e) {
   var $target = $(e.currentTarget).closest('tr');
   if (this.removeBookByTitle($target.attr('data-id'))) {
     $target.remove();
-    this._updateTable();
     return true;
   } else {
     alert('Unable to remove book from library. Please try again.')

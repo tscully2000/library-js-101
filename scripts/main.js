@@ -33,7 +33,7 @@ Library.prototype.addBooks = function(books) {
       bookCount++;
     };
   };
-  this._handleEventTrigger('objUpdate', {details: 'this is a test'})
+  this._handleEventTrigger('objUpdate');
   return bookCount;
 };
 
@@ -47,6 +47,7 @@ Library.prototype.removeBookByTitle = function(title) {
       };
     };
     this.setObject();
+    this._handleEventTrigger('objUpdate');
     return wasRemoved;
   };
   return wasRemoved;
@@ -62,6 +63,7 @@ Library.prototype.removeBookByAuthor = function(authorName) {
       };
     };
     this.setObject();
+    this._handleEventTrigger('objUpdate');
     return result;
   };
   return result;
