@@ -79,7 +79,7 @@ DataTable.prototype._deleteRow = function(e) {
     $target.remove();
     return true;
   } else {
-    alert('Unable to remove book from library. Please try again.')
+    alert('Unable to remove book from library, please try again.')
   };
   return;
 };

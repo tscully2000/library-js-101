@@ -14,11 +14,17 @@ DelBooks.prototype._bindEvents = function() {
   this.$container.find('#remove-books-button').on('click', $.proxy(this._removeFromTable, this));
 };
 
-DelBooks.prototype._removeFromTable = function() {
+DelBooks.prototype._removeFromTable = function(e) {
   var removeByAuthor = this.$container.find('#remove-author-input'),
-      authorInput = $(removeByAuthor).val();
-  this.removeBookByAuthor(authorInput);
-  // this.$container.find('#remove-book-form')[0].reset();
+      authorInput = $(removeByAuthor).val(),
+      clearField = this.$container.find('#remove-book-form')[0].reset();
+  if (this.removeBookByAuthor(authorInput)) {
+    clearField;
+  } else {
+    alert('No matches found!');
+    clearField;
+    e.stopPropagation();
+  };
   return;
 };
 

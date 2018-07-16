@@ -24,25 +24,34 @@ AddBooks.prototype._queueBooks = function() {
       hasVal = true;
       file = $('#cover-input')[0].files[0];
       reader  = new FileReader();
-  reader.onload = function() {
-    qBooks.push({name: 'cover', value: reader.result});
-    $.each(qBooks, function(i, book) {
-      book.value ? qBooksToAdd[book.name] = book.value : hasVal = false;
-    });
-    _self.checkForDup(qBooksToAdd) && hasVal ? _self._tempBookShelf.push(new Book(qBooksToAdd)) : alert('Existing title or empty input field');
-    _self.$container.find('.book-count').text(_self._tempBookShelf.length);
-    _self.$container.find('#add-book-form')[0].reset();
+  if (file) {
+    reader.onload = function() {
+      qBooks.push({name: 'cover', value: reader.result});
+      $.each(qBooks, function(i, book) {
+        book.value ? qBooksToAdd[book.name] = book.value : hasVal = false;
+      });
+      if (_self.checkForDup(qBooksToAdd) && hasVal) {
+        _self._tempBookShelf.push(new Book(qBooksToAdd));
+        _self.$container.find('.book-count').text(_self._tempBookShelf.length);
+        _self.$container.find('#add-book-form')[0].reset();
+      } else {
+        alert('Existing title or empty input field');
+      };
+    };
+    reader.readAsDataURL(file);
+  } else {
+    alert('Please attach a cover');
   };
-  reader.readAsDataURL(file);
   return;
 };
 
-AddBooks.prototype._addToTable = function() {
+AddBooks.prototype._addToTable = function(e) {
   if (this.addBooks(this._tempBookShelf)) {
     this.$container.find('.book-count').text(0);
     this._tempBookShelf = [];
   } else {
     alert('Please add a book to the queue');
+    e.stopPropagation();
   };
   return;
 };

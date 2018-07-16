@@ -1,5 +1,5 @@
 var Book = function(args) {
-  this.cover = args.cover || 'assets/eye-of-the-world.jpg';
+  this.cover = args.cover;
   this.title = args.title;
   this.author = args.author;
   this.numberOfPages = parseInt(args.numberOfPages);
