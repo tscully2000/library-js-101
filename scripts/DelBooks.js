@@ -12,19 +12,24 @@ DelBooks.prototype.init = function() {
 
 DelBooks.prototype._bindEvents = function() {
   this.$container.find('#remove-books-button').on('click', $.proxy(this._removeFromTable, this));
+  this.$container.on('hidden.bs.modal', $.proxy(this._resetForm, this));
 };
 
 DelBooks.prototype._removeFromTable = function(e) {
   var removeByAuthor = this.$container.find('#remove-author-input'),
-      authorInput = $(removeByAuthor).val(),
-      clearField = this.$container.find('#remove-book-form')[0].reset();
+      authorInput = $(removeByAuthor).val();
   if (this.removeBookByAuthor(authorInput)) {
-    clearField;
+    this._resetForm();
   } else {
+    this._resetForm();
     alert('No matches found!');
-    clearField;
     e.stopPropagation();
   };
+  return;
+};
+
+DelBooks.prototype._resetForm = function() {
+  this.$container.find('#remove-book-form')[0].reset();
   return;
 };
 
