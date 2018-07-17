@@ -36,6 +36,7 @@ th {
 }
 
 .glyphicon-remove-circle:hover {
+  color: #a00000;
   transform: scale(1.25);
   transition-duration: all 0.2s ease-in-out;
 }
