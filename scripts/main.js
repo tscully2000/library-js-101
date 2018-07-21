@@ -1,11 +1,24 @@
 var Library = function() {
   this.key = 'myLibrary';
+  this.libraryURL = 'http://localhost:3002/library';
 };
 
 Library.prototype._handleEventTrigger = function(sEvent, oData) {
   var oData = oData || {},
       event = new CustomEvent(sEvent, oData);
   document.dispatchEvent(event);
+};
+
+Library.prototype._handleGetBook = function() {
+  $.ajax({
+    url: this.libraryURL,
+    dataType: 'json',
+    method: 'GET',
+    success: data => {
+      console.log(data);
+      return window.bookShelf = data;
+    }
+  });
 };
 
 Library.prototype.checkForDup = function(book) {
@@ -20,7 +33,7 @@ Library.prototype.checkForDup = function(book) {
 Library.prototype.addBook = function(book) {
   if (this.checkForDup(book)) {
     window.bookShelf.push(book);
-    this.setObject();
+    // this.setObject();
     return true;
   };
   return false;
@@ -46,7 +59,7 @@ Library.prototype.removeBookByTitle = function(title) {
         wasRemoved = true;
       };
     };
-    this.setObject();
+    // this.setObject();
     this._handleEventTrigger('objUpdate');
     return wasRemoved;
   };
@@ -62,7 +75,7 @@ Library.prototype.removeBookByAuthor = function(authorName) {
         result = true;
       };
     };
-    this.setObject();
+    // this.setObject();
     this._handleEventTrigger('objUpdate');
     return result;
   };
@@ -187,6 +200,7 @@ Library.prototype.getObject = function() {
   return myShelf;
 };
 
+window.gLibrary = new Library();
 // var book1 = new Book (cover, 'Eye of the World', 'Robert Jordan', 685, 'January 15, 1990');
 // var book2 = new Book(cover, 'The Great Hunt', 'Robert Jordan', 600, 'November 15, 1990');
 // var book3 = new Book(cover, 'The Phantom Tollbooth', 'Norton Juster', 255, 'February 8, 1961');

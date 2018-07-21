@@ -6,7 +6,7 @@ var DataTable = function() {
 DataTable.prototype = Object.create(Library.prototype);
 
 DataTable.prototype.init = function() {
-  this.getObject();
+  // this.getObject();
   this._updateTable();
   this._bindEvents();
   this._bindCustomEvents();
