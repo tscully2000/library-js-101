@@ -6,9 +6,7 @@ var DataTable = function() {
 DataTable.prototype = Object.create(Library.prototype);
 
 DataTable.prototype.init = function() {
-  // this.getObject();
   this._handleGetBook();
-  // this._updateTable();
   this._bindEvents();
   this._bindCustomEvents();
 };
@@ -53,7 +51,7 @@ DataTable.prototype._createRow = function(book) {
   var tr = document.createElement('tr'),
       editTd = document.createElement('td'),
       editGlyph = document.createElement('span');
-  $(tr).attr('data-id', book.title);
+  $(tr).attr('data-id', book._id);
   $(editGlyph).addClass('glyphicon glyphicon-remove-circle btn');
   editTd.append(editGlyph);
   for (var key in book) {
@@ -78,7 +76,7 @@ DataTable.prototype._createRow = function(book) {
 
 DataTable.prototype._deleteRow = function(e) { 
   var $target = $(e.currentTarget).closest('tr');
-  if (this.removeBookByTitle($target.attr('data-id'))) {
+  if (this.removeBookByID($target.attr('data-id'))) {
     $target.remove();
     return true;
   } else {

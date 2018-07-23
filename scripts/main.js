@@ -1,6 +1,5 @@
 var Library = function() {
-  this.key = 'myLibrary';
-  this.libraryURL = 'http://localhost:3002/library';
+  this.libraryURL = 'http://localhost:3002/library/';
 };
 
 Library.prototype._handleEventTrigger = function(sEvent, oData) {
@@ -10,17 +9,56 @@ Library.prototype._handleEventTrigger = function(sEvent, oData) {
 };
 
 Library.prototype._handleGetBook = function() {
+  var myShelf = [];
   $.ajax({
     url: this.libraryURL,
     dataType: 'json',
     method: 'GET',
     success: data => {
-      window.bookShelf = data;
+      for (var i = 0; i < data.length; i++) {
+        myShelf.push(new Book(data[i]));
+      };
+      window.bookShelf = myShelf;
       this._handleEventTrigger('objUpdate');
     }
   });
-  return window.bookShelf;
+  return myShelf;
 };
+
+Library.prototype._handlePostBook = function(book) {
+  $.ajax({
+    url: this.libraryURL,
+    dataType: 'json',
+    method: 'POST',
+    data: book,
+    success: data => {
+      this._handleEventTrigger('objUpdate');
+    }
+  });
+};
+
+Library.prototype._handleDelBook = function(id) {
+  $.ajax({
+    url: this.libraryURL + id,
+    dataType: 'json',
+    method: 'DELETE',
+    success: data => {
+      this._handleEventTrigger('objUpdate');
+    }
+  });
+};
+
+// Library.prototype._handlePutBook = function(book) {
+//   $.ajax({
+//     url: this.libraryURL,
+//     dataType: 'json',
+//     method: 'PUT',
+//     data: book,
+//     success: data => {
+
+//     }
+//   });
+// };
 
 Library.prototype.checkForDup = function(book) {
   for (var i = 0; i < window.bookShelf.length; i++) {
@@ -34,7 +72,8 @@ Library.prototype.checkForDup = function(book) {
 Library.prototype.addBook = function(book) {
   if (this.checkForDup(book)) {
     window.bookShelf.push(book);
-    // this.setObject();
+    this._handlePostBook(book);
+    this._handleGetBook();
     return true;
   };
   return false;
@@ -47,21 +86,19 @@ Library.prototype.addBooks = function(books) {
       bookCount++;
     };
   };
-  this._handleEventTrigger('objUpdate');
   return bookCount;
 };
 
-Library.prototype.removeBookByTitle = function(title) {
+Library.prototype.removeBookByID = function(id) {
   var wasRemoved = false; 
-  if (title) {
+  if (id) {
     for (var i = 0; i < window.bookShelf.length; i++) {
-      if (window.bookShelf[i].title.toLowerCase() === title.toLowerCase().trim()) {
+      if (window.bookShelf[i]._id === id) {
         window.bookShelf.splice(i, 1);
+        this._handleDelBook(id);
         wasRemoved = true;
       };
     };
-    // this.setObject();
-    this._handleEventTrigger('objUpdate');
     return wasRemoved;
   };
   return wasRemoved;
@@ -72,21 +109,15 @@ Library.prototype.removeBookByAuthor = function(authorName) {
   if (authorName) {
     for (var i = window.bookShelf.length - 1; i >= 0; i--) {
       if (window.bookShelf[i].author.toLowerCase() === authorName.toLowerCase().trim()) {
+        this._handleDelBook(window.bookShelf[i]._id);
         window.bookShelf.splice(i, 1);
+        this._handleEventTrigger('objUpdate');
         result = true;
       };
     };
-    // this.setObject();
-    this._handleEventTrigger('objUpdate');
     return result;
   };
   return result;
-};
-
-Library.prototype.removeAllBooks = function() {
-  window.bookShelf = [];
-  localStorage.setItem(this.key, []);
-  return true;
 };
 
 Library.prototype.getBookByTitle = function(title) {
@@ -183,23 +214,6 @@ Library.prototype.getRandomAuthorName = function() {
   };
   return this.getRandomBook().author;
 };
-
-// Library.prototype.setObject = function() {
-//   localStorage.setItem(this.key, JSON.stringify(window.bookShelf));
-//   return true;
-// };
-
-// Library.prototype.getObject = function() {
-//   var myShelf = [];
-//   if (localStorage.length > 0) {
-//     var books = JSON.parse(localStorage.getItem(this.key));
-//     for (var i = 0; i < books.length; i++) {
-//       myShelf.push(new Book(books[i]));
-//     };
-//     return window.bookShelf = myShelf;
-//   };
-//   return myShelf;
-// };
 
 // var book1 = new Book (cover, 'Eye of the World', 'Robert Jordan', 685, 'January 15, 1990');
 // var book2 = new Book(cover, 'The Great Hunt', 'Robert Jordan', 600, 'November 15, 1990');
