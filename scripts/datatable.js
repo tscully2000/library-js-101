@@ -7,7 +7,8 @@ DataTable.prototype = Object.create(Library.prototype);
 
 DataTable.prototype.init = function() {
   // this.getObject();
-  this._updateTable();
+  this._handleGetBook();
+  // this._updateTable();
   this._bindEvents();
   this._bindCustomEvents();
 };
@@ -57,7 +58,9 @@ DataTable.prototype._createRow = function(book) {
   editTd.append(editGlyph);
   for (var key in book) {
     var td = document.createElement('td');
-    if (key === 'cover') {
+    if (key === '_id' || key === '__v') {
+      // Do nothing
+    } else if (key === 'cover') {
       var coverImg = document.createElement('img');
       $(coverImg).addClass('table-img');
       $(coverImg).attr('src', book.cover);
