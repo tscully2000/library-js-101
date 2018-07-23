@@ -50,7 +50,7 @@ Library.prototype._handleDelBook = function(id) {
 
 // Library.prototype._handlePutBook = function(book) {
 //   $.ajax({
-//     url: this.libraryURL,
+//     url: this.libraryURL + id,
 //     dataType: 'json',
 //     method: 'PUT',
 //     data: book,
@@ -89,7 +89,7 @@ Library.prototype.addBooks = function(books) {
   return bookCount;
 };
 
-Library.prototype.removeBookByID = function(id) {
+Library.prototype.removeBookById = function(id) {
   var wasRemoved = false; 
   if (id) {
     for (var i = 0; i < window.bookShelf.length; i++) {

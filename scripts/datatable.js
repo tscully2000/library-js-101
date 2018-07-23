@@ -76,7 +76,7 @@ DataTable.prototype._createRow = function(book) {
 
 DataTable.prototype._deleteRow = function(e) { 
   var $target = $(e.currentTarget).closest('tr');
-  if (this.removeBookByID($target.attr('data-id'))) {
+  if (this.removeBookById($target.attr('data-id'))) {
     $target.remove();
     return true;
   } else {
