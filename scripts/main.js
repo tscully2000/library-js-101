@@ -32,6 +32,7 @@ Library.prototype._handlePostBook = function(book) {
     method: 'POST',
     data: book,
     success: data => {
+      this._handleGetBook();
       this._handleEventTrigger('objUpdate');
     }
   });
@@ -55,6 +56,7 @@ Library.prototype._handlePutBook = function(id, edit) {
     method: 'PUT',
     data: edit,
     success: data => {
+      this._handleGetBook();
       this._handleEventTrigger('objUpdate');
     }
   });
@@ -73,7 +75,6 @@ Library.prototype.addBook = function(book) {
   if (this.checkForDup(book)) {
     window.bookShelf.push(book);
     this._handlePostBook(book);
-    this._handleGetBook();
     return true;
   };
   return false;
@@ -104,20 +105,36 @@ Library.prototype.removeBookById = function(id) {
   return wasRemoved;
 };
 
+Library.prototype.editBookById = function(id) {
+  var wasEdited = false,
+      editBook;
+  if (id) {
+    for (var i = 0; i < window.bookShelf.length; i++) {
+      if (window.bookShelf[i]._id === id) {
+        editBook = window.bookShelf[i];
+        this._handlePutBook(id, editBook);
+        wasEdited = true;
+      };
+    };
+    return wasEdited;
+  };
+  return wasEdited;
+};
+
 Library.prototype.removeBookByAuthor = function(authorName) {
-  var result = false;
+  var wasRemoved = false;
   if (authorName) {
     for (var i = window.bookShelf.length - 1; i >= 0; i--) {
       if (window.bookShelf[i].author.toLowerCase() === authorName.toLowerCase().trim()) {
         this._handleDeleteBook(window.bookShelf[i]._id);
         window.bookShelf.splice(i, 1);
         this._handleEventTrigger('objUpdate');
-        result = true;
+        wasRemoved = true;
       };
     };
-    return result;
+    return wasRemoved;
   };
-  return result;
+  return wasRemoved;
 };
 
 Library.prototype.getBookByTitle = function(title) {

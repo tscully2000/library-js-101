@@ -81,15 +81,14 @@ DataTable.prototype._deleteRow = function(e) {
     $target.remove();
     return true;
   } else {
-    alert('Unable to remove book from library, please try again.')
+    alert('Unable to remove book from library, please try again.');
   };
-  return;
 };
 
 DataTable.prototype._editRow = function(e) {
-  var $target = $(e.currentTarget).closest('tr');
-  // console.log($(e.currentTarget).text());
-  this._handlePutBook($target.attr('data-id'), $(e.currentTarget).text());
+  var $target = $(e.currentTarget).closest('tr').attr('data-id'),
+      editField = $(e.currentTarget).text();
+  this.editBookById($target);
 };
 
 $(function() {
