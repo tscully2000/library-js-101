@@ -13,6 +13,7 @@ DataTable.prototype.init = function() {
 
 DataTable.prototype._bindEvents = function() {
   this.$container.on('click', '.glyphicon-remove-circle', $.proxy(this._deleteRow, this));
+  this.$container.on('blur', '[contenteditable]', $.proxy(this._editRow, this));
   return;
 };
 
@@ -83,6 +84,12 @@ DataTable.prototype._deleteRow = function(e) {
     alert('Unable to remove book from library, please try again.')
   };
   return;
+};
+
+DataTable.prototype._editRow = function(e) {
+  var $target = $(e.currentTarget).closest('tr');
+  // console.log($(e.currentTarget).text());
+  this._handlePutBook($target.attr('data-id'), $(e.currentTarget).text());
 };
 
 $(function() {

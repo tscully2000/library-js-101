@@ -37,7 +37,7 @@ Library.prototype._handlePostBook = function(book) {
   });
 };
 
-Library.prototype._handleDelBook = function(id) {
+Library.prototype._handleDeleteBook = function(id) {
   $.ajax({
     url: this.libraryURL + id,
     dataType: 'json',
@@ -48,17 +48,17 @@ Library.prototype._handleDelBook = function(id) {
   });
 };
 
-// Library.prototype._handlePutBook = function(book) {
-//   $.ajax({
-//     url: this.libraryURL + id,
-//     dataType: 'json',
-//     method: 'PUT',
-//     data: book,
-//     success: data => {
-
-//     }
-//   });
-// };
+Library.prototype._handlePutBook = function(id, edit) {
+  $.ajax({
+    url: this.libraryURL + id,
+    dataType: 'text',
+    method: 'PUT',
+    data: edit,
+    success: data => {
+      this._handleEventTrigger('objUpdate');
+    }
+  });
+};
 
 Library.prototype.checkForDup = function(book) {
   for (var i = 0; i < window.bookShelf.length; i++) {
@@ -95,7 +95,7 @@ Library.prototype.removeBookById = function(id) {
     for (var i = 0; i < window.bookShelf.length; i++) {
       if (window.bookShelf[i]._id === id) {
         window.bookShelf.splice(i, 1);
-        this._handleDelBook(id);
+        this._handleDeleteBook(id);
         wasRemoved = true;
       };
     };
@@ -109,7 +109,7 @@ Library.prototype.removeBookByAuthor = function(authorName) {
   if (authorName) {
     for (var i = window.bookShelf.length - 1; i >= 0; i--) {
       if (window.bookShelf[i].author.toLowerCase() === authorName.toLowerCase().trim()) {
-        this._handleDelBook(window.bookShelf[i]._id);
+        this._handleDeleteBook(window.bookShelf[i]._id);
         window.bookShelf.splice(i, 1);
         this._handleEventTrigger('objUpdate');
         result = true;
