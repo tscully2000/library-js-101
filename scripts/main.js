@@ -105,22 +105,6 @@ Library.prototype.removeBookById = function(id) {
   return wasRemoved;
 };
 
-Library.prototype.editBookById = function(id) {
-  var wasEdited = false,
-      editBook;
-  if (id) {
-    for (var i = 0; i < window.bookShelf.length; i++) {
-      if (window.bookShelf[i]._id === id) {
-        editBook = window.bookShelf[i];
-        this._handlePutBook(id, editBook);
-        wasEdited = true;
-      };
-    };
-    return wasEdited;
-  };
-  return wasEdited;
-};
-
 Library.prototype.removeBookByAuthor = function(authorName) {
   var wasRemoved = false;
   if (authorName) {

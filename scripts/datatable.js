@@ -67,6 +67,7 @@ DataTable.prototype._createRow = function(book) {
       tr.append(td);
     } else {
       $(td).attr('contenteditable', 'true');
+      $(td).addClass(key);
       $(td).text(book[key]);
       tr.append(td);
     };
@@ -86,9 +87,21 @@ DataTable.prototype._deleteRow = function(e) {
 };
 
 DataTable.prototype._editRow = function(e) {
-  var $target = $(e.currentTarget).closest('tr').attr('data-id'),
-      editField = $(e.currentTarget).text();
-  this.editBookById($target);
+  var id = $(e.currentTarget).closest('tr').attr('data-id'),
+      editClass = $(e.currentTarget).attr('class'),
+      editField = $(e.currentTarget).text(),
+      editBook;
+  for (var i = 0; i < window.bookShelf.length; i++) {
+    if (window.bookShelf[i]._id === id) {
+      editBook = window.bookShelf[i];
+    };
+  };
+  for (var key in editBook) {
+    if (key === editClass) {
+      editBook[key] = editField;
+      this._handlePutBook(id, editBook);
+    };
+  };
 };
 
 $(function() {
