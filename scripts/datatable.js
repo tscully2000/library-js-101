@@ -90,12 +90,7 @@ DataTable.prototype._editRow = function(e) {
   var id = $(e.currentTarget).closest('tr').attr('data-id'),
       editClass = $(e.currentTarget).attr('class'),
       editField = $(e.currentTarget).text(),
-      editBook;
-  for (var i = 0; i < window.bookShelf.length; i++) {
-    if (window.bookShelf[i]._id === id) {
-      editBook = window.bookShelf[i];
-    };
-  };
+      editBook = this.editBookById(id);
   for (var key in editBook) {
     if (key === editClass) {
       editBook[key] = editField;

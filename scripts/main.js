@@ -25,6 +25,19 @@ Library.prototype._handleGetBook = function() {
   return myShelf;
 };
 
+Library.prototype._handleGetRandom = function() {
+  var randomBookId = this.getRandomBook()._id;
+  var randomBook = $.ajax({
+    url: this.libraryURL + randomBookId,
+    dataType: 'json',
+    method: 'GET',
+    success: function(data) {
+      return data;
+    }
+  });
+  return randomBook;
+};
+
 Library.prototype._handlePostBook = function(book) {
   $.ajax({
     url: this.libraryURL,
@@ -103,6 +116,14 @@ Library.prototype.removeBookById = function(id) {
     return wasRemoved;
   };
   return wasRemoved;
+};
+
+Library.prototype.editBookById = function(id) {
+  for (var i = 0; i < window.bookShelf.length; i++) {
+    if (window.bookShelf[i]._id === id) {
+      return window.bookShelf[i];
+    };
+  };
 };
 
 Library.prototype.removeBookByAuthor = function(authorName) {

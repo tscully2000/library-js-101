@@ -15,8 +15,9 @@ RecBook.prototype._bindEvents = function() {
   return;
 };
 
-RecBook.prototype._handleRecBook = function() {
-  var recBook = this.getRandomBook();
+RecBook.prototype._handleRecBook = async function() {
+  var randomBook = await this._handleGetRandom(),
+      recBook = new Book(randomBook);
   if (recBook) {
     this.$container.modal('show');
     this._createRecBook(recBook);
