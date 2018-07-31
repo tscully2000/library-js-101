@@ -31,28 +31,31 @@ AddBooks.prototype._queueBooks = function() {
         book.value ? qBooksToAdd[book.name] = book.value : hasVal = false;
       });
       if (_self.checkForDup(qBooksToAdd) && hasVal) {
-        _self._tempBookShelf.push(new Book(qBooksToAdd));
+        _self._tempBookShelf.push(qBooksToAdd);
         _self.$container.find('.book-count').text(_self._tempBookShelf.length);
         _self._resetForm();
       } else {
         alert('Existing title or empty input field');
-      };
+      }
     };
     reader.readAsDataURL(file);
   } else {
     alert('Empty input field');
-  };
+  }
   return;
 };
 
 AddBooks.prototype._addToTable = function(e) {
-  if (this.addBooks(this._tempBookShelf)) {
-    this.$container.find('.book-count').text(0);
-    this._tempBookShelf = [];
-  } else {
-    alert('Please add a book to the queue');
-    e.stopPropagation();
-  };
+  var _self = this;
+  this.addBooks(this._tempBookShelf).then(function(data) {
+    if (data.insertedCount) {
+      _self.$container.find('.book-count').text(0);
+      _self._tempBookShelf = [];
+    } else {
+      alert('Please add a book to the queue');
+      e.stopPropagation();
+    }
+  });
   return;
 };
 

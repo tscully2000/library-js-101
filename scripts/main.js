@@ -9,25 +9,21 @@ Library.prototype._handleEventTrigger = function(sEvent, oData) {
 };
 
 Library.prototype._handleGetBook = function() {
-  var myShelf = [];
-  $.ajax({
+  var httpGet = $.ajax({
     url: this.libraryURL,
     dataType: 'json',
     method: 'GET',
     success: data => {
-      for (var i = 0; i < data.length; i++) {
-        myShelf.push(new Book(data[i]));
-      };
-      window.bookShelf = myShelf;
+      window.bookShelf = window.bookify(data);
       this._handleEventTrigger('objUpdate');
     }
   });
-  return myShelf;
+  return httpGet;
 };
 
 Library.prototype._handleGetRandom = function() {
-  var randomBookId = this.getRandomBook()._id;
-  var randomBook = $.ajax({
+  var randomBookId = this.getRandomBook()._id,
+      randomBook = $.ajax({
     url: this.libraryURL + randomBookId,
     dataType: 'json',
     method: 'GET',
@@ -36,19 +32,6 @@ Library.prototype._handleGetRandom = function() {
     }
   });
   return randomBook;
-};
-
-Library.prototype._handlePostBook = function(book) {
-  $.ajax({
-    url: this.libraryURL,
-    dataType: 'json',
-    method: 'POST',
-    data: book,
-    success: data => {
-      this._handleGetBook();
-      this._handleEventTrigger('objUpdate');
-    }
-  });
 };
 
 Library.prototype._handleDeleteBook = function(id) {
@@ -84,23 +67,22 @@ Library.prototype.checkForDup = function(book) {
   return true;
 };
 
-Library.prototype.addBook = function(book) {
-  if (this.checkForDup(book)) {
-    window.bookShelf.push(book);
-    this._handlePostBook(book);
-    return true;
-  };
-  return false;
-};
-
-Library.prototype.addBooks = function(books) {
-  var bookCount = 0;
-  for (var i = 0; i < books.length; i++) {
-    if (this.addBook(books[i])) {
-      bookCount++;
-    };
-  };
-  return bookCount;
+Library.prototype.addBooks = function(arrBooks) {
+  var httpPost = $.ajax({
+    url: this.libraryURL,
+    dataType: 'json',
+    method: 'POST',
+    data: {books: JSON.stringify(arrBooks) },
+    success: data => {
+      if (data.insertedCount) {
+        window.bookShelf = window.bookShelf.concat(window.bookify(data));
+        this._handleGetBook();
+        this._handleEventTrigger('objUpdate');
+      }
+      return data.insertedCount;
+    }
+  });
+  return httpPost;
 };
 
 Library.prototype.removeBookById = function(id) {
@@ -241,4 +223,3 @@ Library.prototype.getRandomAuthorName = function() {
 // var book2 = new Book(cover, 'The Great Hunt', 'Robert Jordan', 600, 'November 15, 1990');
 // var book3 = new Book(cover, 'The Phantom Tollbooth', 'Norton Juster', 255, 'February 8, 1961');
 // var book4 = new Book(cover, 'The Lion, the Witch, and the Wardrobe', 'C.S. Lewis', 208, 'October 16, 1950');
-// var bookArr = [book1, book2, book3, book4];
