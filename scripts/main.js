@@ -27,11 +27,24 @@ Library.prototype._handleGetRandom = function() {
     url: this.libraryURL + randomBookId,
     dataType: 'json',
     method: 'GET',
-    success: function(data) {
+    success: data => {
       return data;
     }
   });
   return randomBook;
+};
+
+Library.prototype._handleSearch = function(search) {
+  var searchTable = $.ajax({
+    url: this.libraryURL + 'search/' + search,
+    dataType: 'json',
+    method: 'GET',
+    success: data => {
+      window.bookShelf = window.bookify(data);
+      this._handleEventTrigger('objUpdate');
+    }
+  });
+  return searchTable;
 };
 
 Library.prototype._handleDeleteBook = function(id) {
@@ -177,22 +190,22 @@ Library.prototype.getNumPage = function(numPage) {
   return false;
 };
 
-Library.prototype.searchShelf = function(args) {
-  if (args) {
-    var foundBooks = this.getBookByTitle(args).concat(this.getBooksByAuthor(args), this.getPubDate(args), this.getNumPage(args));
-    if (foundBooks.length < 1) {
-      alert('No books found.');
-      return false;
-    };
-    var filteredBooks = foundBooks.filter(function(value, index, self) {
-      return self.indexOf(value) === index;
-    });
-    window.bookShelf = filteredBooks;
-    this._handleEventTrigger('objUpdate');
-    return;
-  };
-  return false;
-};
+// Library.prototype.searchShelf = function(args) {
+//   if (args) {
+//     var foundBooks = this.getBookByTitle(args).concat(this.getBooksByAuthor(args), this.getPubDate(args), this.getNumPage(args));
+//     if (foundBooks.length < 1) {
+//       alert('No books found.');
+//       return false;
+//     };
+//     var filteredBooks = foundBooks.filter(function(value, index, self) {
+//       return self.indexOf(value) === index;
+//     });
+//     window.bookShelf = filteredBooks;
+//     this._handleEventTrigger('objUpdate');
+//     return;
+//   };
+//   return false;
+// };
 
 Library.prototype.getAuthors = function() {
   var currentBooks = [];

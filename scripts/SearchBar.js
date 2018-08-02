@@ -15,11 +15,11 @@ SearchBar.prototype._bindEvents = function() {
   return;
 };
 
-SearchBar.prototype._searchTable = function(e) {
+SearchBar.prototype._searchTable = async function(e) {
   e.preventDefault();
-  var searchInput = this.$container.find('#search-bar').val();
-  this.searchShelf(searchInput);
-  return;
+  var searchInput = this.$container.find('#search-bar').val(),
+      handleSearch = await this._handleSearch(searchInput);
+  return handleSearch;
 };
 
 $(function() {
