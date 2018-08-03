@@ -6,7 +6,8 @@ var DataTable = function() {
 DataTable.prototype = Object.create(Library.prototype);
 
 DataTable.prototype.init = function() {
-  this._handleGetBook();
+  // this._handleGetBook();
+  this._pagination(1);
   this._bindEvents();
   this._bindCustomEvents();
 };
@@ -20,6 +21,12 @@ DataTable.prototype._bindEvents = function() {
 DataTable.prototype._bindCustomEvents = function() {
   $(document).on('objUpdate', $.proxy(this._updateTable, this));
   return;
+};
+
+DataTable.prototype._pagination = async function() {
+  var pagination = await this._handlePagination(1);
+  console.log(pagination);
+  return pagination;
 };
 
 DataTable.prototype._updateTable = function() {

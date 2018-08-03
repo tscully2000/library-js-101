@@ -37,7 +37,7 @@
       <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
         <form class="form-group" id="search-form">
           <label for="search-bar" class="sr-only">Search Bar</label>
-          <input id="search-bar" class="form-control center-block text-center search-height" type="text" name="searchbar" placeholder="Title, author, page number, or publish date.">
+          <input id="search-bar" class="form-control center-block text-center search-height" type="text" name="searchbar" placeholder="Please enter a title or author.">
         </form>
         <div class="text-center" id="recommend-wrap">
           <button class="btn btn-default btn-sm" id="recommend-book-button">Recommend Book</button>
@@ -47,11 +47,16 @@
     </section>
     <!-- Library Filter Buttons -->
     <aside class="row filter-buttons">
-      <div class="col-md-4 col-sm-4 col-xs-6" id="show-all">
+      <div class="col-md-4 col-sm-4 col-xs-4" id="show-all">
         <button class="btn btn-default btn-sm" id="all-books-button">All Books</button>
         <button class="btn btn-default btn-sm" id="all-authors-button">All Authors</button>
       </div>
-      <div class="col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4 col-xs-6" id="add-remove">
+      <div class="col-md-4 col-sm-4 col-xs-4 text-center" id="pages">
+        <button class="btn btn-default btn-sm disabled" id="prev-button">&laquo;</button>
+        <span class="current-page">1</span>
+        <button class="btn btn-default btn-sm" id="next-button">&raquo;</button>
+      </div> 
+      <div class="col-md-4 col-sm-4 col-xs-4" id="add-remove">
         <button class="btn btn-default btn-sm pull-right remove-book-button" data-toggle="modal" data-target="#remove-book">Del. Book</button>
         <button class="btn btn-default btn-sm pull-right add-book-button" data-toggle="modal" data-target="#add-book">Add Book</button>
       </div>

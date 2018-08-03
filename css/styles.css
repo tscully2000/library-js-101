@@ -13,7 +13,7 @@ section {
 }
 
 main {
-  margin: 1.5em 0 0 0;
+  margin: 0.75em 0 0 0;
 }
 
 td,
@@ -63,4 +63,9 @@ th {
 
 .search-height {
   height: 3.5em;
+}
+
+.current-page {
+  font-weight: 800;
+  margin: 0 0.25em;
 }

@@ -8,6 +8,19 @@ Library.prototype._handleEventTrigger = function(sEvent, oData) {
   document.dispatchEvent(event);
 };
 
+Library.prototype._handlePagination = function(currentPage) {
+  var pages = $.ajax({
+    url: this.libraryURL + 'page/' + currentPage,
+    dataType: 'json',
+    method: 'GET',
+    success: data => {
+      window.bookShelf = window.bookify(data);
+      this._handleEventTrigger('objUpdate');
+    }
+  });
+  return pages;
+};
+
 Library.prototype._handleGetBook = function() {
   var httpGet = $.ajax({
     url: this.libraryURL,
@@ -85,7 +98,7 @@ Library.prototype.addBooks = function(arrBooks) {
     url: this.libraryURL,
     dataType: 'json',
     method: 'POST',
-    data: {books: JSON.stringify(arrBooks) },
+    data: { books: arrBooks },
     success: data => {
       if (data.insertedCount) {
         window.bookShelf = window.bookShelf.concat(window.bookify(data));
@@ -136,76 +149,6 @@ Library.prototype.removeBookByAuthor = function(authorName) {
   };
   return wasRemoved;
 };
-
-Library.prototype.getBookByTitle = function(title) {
-  if (title) {
-    var titleMatch = [];
-    for (var i = 0; i < window.bookShelf.length; i++) {
-      if (window.bookShelf[i].title.toLowerCase().indexOf(title.toLowerCase().trim()) > -1) {
-        titleMatch.push(window.bookShelf[i]);
-      };
-    };
-    return titleMatch;
-  };
-  return false;
-};
-
-Library.prototype.getBooksByAuthor = function(authorName) {
-  if (authorName) {
-    var authorMatch = [];
-    for (var i = 0; i < window.bookShelf.length; i++) {
-      if (window.bookShelf[i].author.toLowerCase().indexOf(authorName.toLowerCase().trim()) > -1) {
-        authorMatch.push(window.bookShelf[i]);
-      };
-    };
-    return authorMatch;
-  };
-  return false;
-};
-
-Library.prototype.getPubDate = function(pubDate) {
-  if (pubDate) {
-    var pubMatch = [];
-    for (var i = 0; i < window.bookShelf.length; i++) {
-      if (window.bookShelf[i].publishDate === parseInt(pubDate)) {
-        pubMatch.push(window.bookShelf[i]);
-      };
-    };
-    return pubMatch;
-  };
-  return false;
-};
-
-Library.prototype.getNumPage = function(numPage) {
-  if (numPage) {
-    var pageMatch = [];
-    for (var i = 0; i < window.bookShelf.length; i++) {
-      var totalPages = window.bookShelf[i].numberOfPages;
-      if (totalPages >= parseInt(numPage) - 50 && totalPages <= parseInt(numPage) + 50) {
-        pageMatch.push(window.bookShelf[i]);
-      }; 
-    };
-    return pageMatch;
-  };
-  return false;
-};
-
-// Library.prototype.searchShelf = function(args) {
-//   if (args) {
-//     var foundBooks = this.getBookByTitle(args).concat(this.getBooksByAuthor(args), this.getPubDate(args), this.getNumPage(args));
-//     if (foundBooks.length < 1) {
-//       alert('No books found.');
-//       return false;
-//     };
-//     var filteredBooks = foundBooks.filter(function(value, index, self) {
-//       return self.indexOf(value) === index;
-//     });
-//     window.bookShelf = filteredBooks;
-//     this._handleEventTrigger('objUpdate');
-//     return;
-//   };
-//   return false;
-// };
 
 Library.prototype.getAuthors = function() {
   var currentBooks = [];
