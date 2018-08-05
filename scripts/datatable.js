@@ -7,7 +7,7 @@ DataTable.prototype = Object.create(Library.prototype);
 
 DataTable.prototype.init = function() {
   // this._handleGetBook();
-  this._pagination(1);
+  this._handlePagination(1);
   this._bindEvents();
   this._bindCustomEvents();
 };
@@ -15,6 +15,8 @@ DataTable.prototype.init = function() {
 DataTable.prototype._bindEvents = function() {
   this.$container.on('click', '.glyphicon-remove-circle', $.proxy(this._deleteRow, this));
   this.$container.on('blur', '[contenteditable]', $.proxy(this._editRow, this));
+  $('#pages').on('click', '#prev-button', $.proxy(this._prevPagination, this))
+  $('#pages').on('click', '#next-button', $.proxy(this._nextPagination, this));
   return;
 };
 
@@ -23,11 +25,21 @@ DataTable.prototype._bindCustomEvents = function() {
   return;
 };
 
-DataTable.prototype._pagination = async function() {
-  var pagination = await this._handlePagination(1);
+DataTable.prototype._prevPagination = async function() {
+  var page = $('.current-page').text();
+  page = page--;
+  var pagination = await this._handlePagination(page);
   console.log(pagination);
   return pagination;
 };
+
+DataTable.prototype._nextPagination = async function() {
+  var page = $('.current-page').text();
+  page = page++;
+  var pagination = await this._handlePagination(page);
+  console.log(pagination);
+  return pagination;
+}
 
 DataTable.prototype._updateTable = function() {
   var _self = this,
