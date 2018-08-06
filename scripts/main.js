@@ -8,9 +8,9 @@ Library.prototype._handleEventTrigger = function(sEvent, oData) {
   document.dispatchEvent(event);
 };
 
-Library.prototype._handlePagination = function(currentPage) {
+Library.prototype._handlePagination = function(currentPage, lastId, upDown) {
   var pages = $.ajax({
-    url: this.libraryURL + 'page/' + currentPage,
+    url: this.libraryURL + 'page/' + currentPage + '/' + lastId + '/' + upDown,
     dataType: 'json',
     method: 'GET',
     success: data => {

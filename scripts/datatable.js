@@ -5,9 +5,9 @@ var DataTable = function() {
 
 DataTable.prototype = Object.create(Library.prototype);
 
-DataTable.prototype.init = function() {
-  // this._handleGetBook();
-  this._handlePagination(1);
+DataTable.prototype.init = async function() {
+  await this._handleGetBook();
+  this._handlePagination(1, window.bookShelf[0]._id, '=');
   this._bindEvents();
   this._bindCustomEvents();
 };
@@ -27,19 +27,30 @@ DataTable.prototype._bindCustomEvents = function() {
 
 DataTable.prototype._prevPagination = async function() {
   var page = $('.current-page').text();
-  page = page--;
-  var pagination = await this._handlePagination(page);
-  console.log(pagination);
+  page = parseInt(page) - 1;
+  if (page === 1) { $('#prev-button').attr('disabled', true) };
+  if (page >= 1) { 
+    $('.current-page').text(page);
+    $('#next-button').attr('disabled', false);
+  }
+  var lastId = window.bookShelf[0]._id, pagination = await this._handlePagination(page, lastId, '<');
   return pagination;
 };
 
 DataTable.prototype._nextPagination = async function() {
   var page = $('.current-page').text();
-  page = page++;
-  var pagination = await this._handlePagination(page);
-  console.log(pagination);
+  page = parseInt(page) + 1;
+  if (page > 1) { $('#prev-button').attr('disabled', false) };
+  var lastId = window.bookShelf[window.bookShelf.length - 1]._id, pagination;
+  if (window.bookShelf.length < 4) { 
+    $('#next-button').attr('disabled', true);
+    alert('There are no more books in the library!');
+  } else {
+    $('.current-page').text(page);
+    pagination = await this._handlePagination(page, lastId, '>');
+  }
   return pagination;
-}
+};
 
 DataTable.prototype._updateTable = function() {
   var _self = this,
